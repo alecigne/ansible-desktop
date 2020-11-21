@@ -1,1 +1,59 @@
 #+TITLE: Ansible Desktop
+
+This repository aims at automating the configuration of my Debian
+workstations using a combination of [[https://www.ansible.com/][Ansible]] and [[https://github.com/alecigne/dotfiles][dotfiles]].
+
+* Installing Debian
+
+1. Download a =netinst= ISO image from the [[https://www.debian.org/distrib/netinst][official website]].
+
+2. Create a bootable USB drive:
+
+   #+begin_src sh
+     sudo dd if=[path_to_iso] of=[path_to_usb]
+   #+end_src
+
+   I usually use =sudo fdisk -l= to know the path to the USB
+   drive. *Be careful*, as choosing the wrong path here might cause
+   serious damage.
+
+3. Install Debian. This can be [[https://www.debian.org/releases/buster/amd64/apb.en.html][automated too]]! I install only the
+   standard system utilities.
+
+* Manual steps
+
+The first steps must be done as =root=:
+
+1. I will use Debian unstable. Edit =/etc/apt/sources.list=:
+
+   #+begin_src conf
+     deb http://deb.debian.org/debian/ unstable main contrib non-free
+     deb-src http://deb.debian.org/debian/ unstable main contrib non-free
+   #+end_src
+
+2. Upgrade the system:
+
+   #+begin_src sh
+     apt update && apt upgrade
+   #+end_src
+
+3. Install Ansible, Git and sudo:
+
+   #+begin_src sh
+     apt install ansible git sudo
+   #+end_src
+
+4. Add yourself to the =sudoers= file:
+
+   #+begin_src sh
+     echo "alc ALL=(ALL:ALL) ALL" > /etc/sudoers.d/alc
+   #+end_src
+
+5. Launch the Ansible playbook as a user. Ansible will use =sudo= when
+   required:
+
+   #+begin_src sh
+     ansible-pull -U https://github.com/alecigne/ansible-desktop.git -K
+   #+end_src
+
+   =K= will ask for the user password.

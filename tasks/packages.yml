@@ -1,0 +1,14 @@
+- name: Install packages
+  become: yes
+  become_method: sudo
+  apt: name={{item}}
+  with_items:
+    - alttab
+    - feh
+    - i3
+    - mupdf
+    - ncdu
+    - numlockx
+    - pandoc
+    - stow
+    - xorg
