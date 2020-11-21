@@ -1,14 +1,31 @@
 - name: Install packages
   become: yes
   become_method: sudo
-  apt: name={{item}}
-  with_items:
-    - alttab
-    - feh
-    - i3
-    - mupdf
-    - ncdu
-    - numlockx
-    - pandoc
-    - stow
-    - xorg
+  apt:
+    pkg:
+      - alttab
+      - aptitude
+      - borgbackup
+      - emacs
+      - feh
+      - firefox
+      - gnupg
+      - i3
+      - ledger
+      - mupdf
+      - ncdu
+      - network-manager
+      - numlockx
+      - pandoc
+      - pass
+      - redshift
+      - restic
+      - rofi
+      - rxvt-unicode
+      - stow
+      - tmux
+      - tree
+      - vlc
+      - xorg
+      - zsh
+    state: present

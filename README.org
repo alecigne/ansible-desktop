@@ -57,3 +57,25 @@ The first steps must be done as =root=:
    #+end_src
 
    =K= will ask for the user password.
+
+* About =ansible-pull=
+
+From the Ansible documentation:
+
+#+begin_quote
+The ansible-pull is a small script that will checkout a repo of
+configuration instructions from git, and then run ansible-playbook
+against that content.
+#+end_quote
+
+Thus, I can also launch the script with:
+
+#+begin_src sh
+  ansible-playbook local.yml -K
+#+end_src
+
+* Tasks
+
+- [ ] Pull dotfiles submodules. The new workstation must register
+  itself to Github (SSH key).
+- [ ] Do not re-execute Stow every time
