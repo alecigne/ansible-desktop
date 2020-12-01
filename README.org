@@ -1,7 +1,7 @@
 #+TITLE: Ansible Desktop
 
-This repository aims at automating the configuration of my Debian
-workstations using a combination of [[https://www.ansible.com/][Ansible]] and [[https://github.com/alecigne/dotfiles][dotfiles]].
+This repository aims at automating the setup of my Debian workstations
+using a combination of [[https://www.ansible.com/][Ansible]] + my [[https://github.com/alecigne/dotfiles][dotfiles]].
 
 * Installing Debian
 
@@ -22,41 +22,45 @@ workstations using a combination of [[https://www.ansible.com/][Ansible]] and [[
 
 * Manual steps
 
-The first steps must be done as =root=:
+There are still a few manual steps, that I hope I will get rid of with
+time.
 
-1. I will use Debian unstable. Edit =/etc/apt/sources.list=:
+1. [as root] Edit =/etc/apt/sources.list=:
 
    #+begin_src conf
-     deb http://deb.debian.org/debian/ unstable main contrib non-free
-     deb-src http://deb.debian.org/debian/ unstable main contrib non-free
+     deb http://deb.debian.org/debian/ [debian-version] main contrib non-free
+     deb-src http://deb.debian.org/debian/ [debian-version] main contrib non-free
    #+end_src
 
-2. Upgrade the system:
+   =debian-version= must be replaced with the version of Debian that I
+   want to install, usually =testing= or =unstable=.
+
+2. [as root] Upgrade the system:
 
    #+begin_src sh
      apt update && apt upgrade
    #+end_src
 
-3. Install Ansible, Git and sudo:
+3. [as root] Install Ansible, Git and sudo:
 
    #+begin_src sh
      apt install ansible git sudo
    #+end_src
 
-4. Add yourself to the =sudoers= file:
+4. [as root] Add yourself to the =sudoers= file:
 
    #+begin_src sh
      echo "alc ALL=(ALL:ALL) ALL" > /etc/sudoers.d/alc
    #+end_src
 
-5. Launch the Ansible playbook as a user. Ansible will use =sudo= when
-   required:
+5. Clone the repository and launch the Ansible playbook as a user:
 
    #+begin_src sh
-     ansible-pull -U https://github.com/alecigne/ansible-desktop.git -K
+     ansible-playbook local.yml -K
    #+end_src
 
-   =K= will ask for the user password.
+   Ansible will use =sudo= when required. =-K= will ask for the user
+   password.
 
 * About =ansible-pull=
 
@@ -71,11 +75,15 @@ against that content.
 Thus, I can also launch the script with:
 
 #+begin_src sh
-  ansible-playbook local.yml -K
+  ansible-pull -U https://github.com/alecigne/ansible-desktop.git -K -C [branch]
 #+end_src
+
+I prefer the more detailed output of =ansible-playbook=.
 
 * Tasks
 
 - [ ] Pull dotfiles submodules. The new workstation must register
-  itself to Github (SSH key).
+  itself to Github (SSH key) or a SSH keypair must be created
+  beforehand as a manual step.
+
 - [ ] Do not re-execute Stow every time
