@@ -1,4 +1,4 @@
-- name: Install packages
+- name: Install packages from apt
   become: yes
   become_method: sudo
   apt:
@@ -29,3 +29,16 @@
       - xorg
       - zsh
     state: present
+
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: ~/.oh-my-zsh
+    force: yes
+
+- name: Install powerlevel10k
+  git:
+    repo: https://github.com/romkatv/powerlevel10k
+    depth: 1
+    dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
+    force: yes

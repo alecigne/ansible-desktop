@@ -9,3 +9,4 @@
   tasks:
     - include: tasks/packages.yml
     - include: tasks/home.yml
+    - include: tasks/system-config.yml
