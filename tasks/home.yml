@@ -20,3 +20,21 @@
 
 - name: Stow configurations
   command: chdir={{ ansible_env.HOME }}/etc/dotfiles bash stow.bash
+
+- name: Apply correct permissions to .gnupg dirs (700)
+  command: find {{ ansible_env.HOME }}/.gnupg -type d -exec chmod -c 700 {} \;
+  register: chmod_result
+  changed_when: "chmod_result.stdout != \"\""
+
+- name: Apply correct permissions to .gnupg files (600)
+  command: find -L {{ ansible_env.HOME }}/.gnupg -type f -exec chmod -c 600 {} \;
+  register: chmod_result
+  changed_when: "chmod_result.stdout != \"\""
+
+# Doesn't work!
+# - name: Apply correct permissions to .gnupg
+#   file:
+#     path: "{{ ansible_env.HOME }}/etc/dotfiles/gnupg/.gnupg"
+#     state: directory
+#     recurse: yes
+#     mode: u=rw-x+X,g=-rwx,o=-rwx
