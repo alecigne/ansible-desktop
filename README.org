@@ -1,7 +1,11 @@
 #+TITLE: Ansible Desktop
 
 This repository aims at automating the setup of my Debian workstations
-using a combination of [[https://www.ansible.com/][Ansible]] + my [[https://github.com/alecigne/dotfiles][dotfiles]].
+using [[https://www.ansible.com/][Ansible]].
+
+This repo works in combination with my [[https://github.com/alecigne/my-utils][utils]] (my own small
+housekeeping programs) and my [[https://github.com/alecigne/dotfiles][dotfiles]] (config files for the programs
+I use).
 
 * Installing Debian
 
