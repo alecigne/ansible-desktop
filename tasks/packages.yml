@@ -9,8 +9,10 @@
       - emacs
       - feh
       - firefox
+      - ghostscript
       - gnupg
       - i3
+      - imagemagick
       - ledger
       - mupdf
       - ncdu
@@ -26,6 +28,7 @@
       - tmux
       - tree
       - vlc
+      - xclip
       - xorg
       - zsh
     state: present
@@ -42,3 +45,21 @@
     depth: 1
     dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
     force: yes
+
+- name: Clone personal utils
+  git:
+    repo: https://github.com/alecigne/my-utils.git
+    dest: "{{ ansible_env.HOME }}/src/scripts"
+
+- name: Find personal scripts
+  find:
+    paths: "{{ ansible_env.HOME }}/src/scripts"
+    patterns: "*.bash"
+  register: find
+
+- name: Symlink personal scripts
+  file:
+    src: "{{ item.path }}"
+    path: "{{ ansible_env.HOME }}/bin/{{ (item.path | basename | splitext)[0] }}"
+    state: link
+  with_items: "{{ find.files }}"
