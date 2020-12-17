@@ -21,6 +21,8 @@
 
 - name: Stow configurations
   command: chdir={{ ansible_env.HOME }}/etc/dotfiles bash stow.bash
+  register: stow_result
+  changed_when: "stow_result.stderr != \"\""
 
 - name: Apply correct permissions to .gnupg dirs (700)
   command: find {{ ansible_env.HOME }}/.gnupg -type d -exec chmod -c 700 {} \;
