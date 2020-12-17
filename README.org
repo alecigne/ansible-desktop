@@ -87,3 +87,8 @@ I prefer the more detailed output of =ansible-playbook=.
   beforehand as a manual step.
 
 - [ ] Do not re-execute Stow every time
+
+- Packages to add:
+
+  + [ ] =veracrypt= \\
+    Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
