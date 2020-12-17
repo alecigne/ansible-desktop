@@ -17,6 +17,7 @@
     repo: https://github.com/alecigne/dotfiles.git
     dest: "{{ ansible_env.HOME }}/etc/dotfiles"
     recursive: no
+    update: no
 
 - name: Stow configurations
   command: chdir={{ ansible_env.HOME }}/etc/dotfiles bash stow.bash
