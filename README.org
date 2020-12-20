@@ -7,7 +7,11 @@ This repo works in combination with my [[https://github.com/alecigne/my-utils][u
 housekeeping programs) and my [[https://github.com/alecigne/dotfiles][dotfiles]] (config files for the programs
 I use).
 
-* Installing Debian
+* Procedure
+
+This short documentation acts as a personal reminder :)
+
+** Installing and upgrading Debian
 
 1. Download a =netinst= ISO image from the [[https://www.debian.org/distrib/netinst][official website]].
 
@@ -17,19 +21,13 @@ I use).
      sudo dd if=[path_to_iso] of=[path_to_usb]
    #+end_src
 
-   I usually use =sudo fdisk -l= to know the path to the USB
-   drive. *Be careful*, as choosing the wrong path here might cause
-   serious damage.
+   I usually use =lsblk= to know the path to the USB drive. *Be
+   careful*, as choosing the wrong path might cause serious damage.
 
-3. Install Debian. This can be [[https://www.debian.org/releases/buster/amd64/apb.en.html][automated too]]! I install only the
-   standard system utilities.
+3. Install Debian. I set up an encrypted LVM and I install the
+   standard system utilities only.
 
-* Manual steps
-
-There are still a few manual steps, that I hope I will get rid of with
-time.
-
-1. [as root] Edit =/etc/apt/sources.list=:
+4. [as root] Edit =/etc/apt/sources.list=:
 
    #+begin_src conf
      deb http://deb.debian.org/debian/ [debian-version] main contrib non-free
@@ -39,32 +37,48 @@ time.
    =debian-version= must be replaced with the version of Debian that I
    want to install, usually =testing= or =unstable=.
 
-2. [as root] Upgrade the system:
+5. [as root] Upgrade the system:
 
    #+begin_src sh
      apt update && apt upgrade
    #+end_src
 
-3. [as root] Install Ansible, Git and sudo:
+** Installing and configuring necessary packages
+
+1. [as root] Install Ansible, Git and sudo:
 
    #+begin_src sh
      apt install ansible git sudo
    #+end_src
 
-4. [as root] Add yourself to the =sudoers= file:
+   - Ansible is needed for... running our Ansible setup!
+   - Ansible needs =git= for cloning repos and =sudo= for running some
+     commands. Besides, I need =git= to clone this repo on the
+     machine.
+
+2. [as root] Add yourself to the =sudoers= file:
 
    #+begin_src sh
      echo "alc ALL=(ALL:ALL) ALL" > /etc/sudoers.d/alc
    #+end_src
 
-5. Clone the repository and launch the Ansible playbook as a user:
+** Running the installation playbook
+
+1. Clone the repository:
+
+   #+begin_src sh
+     git clone git@github.com:alecigne/ansible-desktop.git
+   #+end_src
+
+2. In the repo's directory, launch the Ansible playbook as a user
+   (Ansible will use =sudo= on a per-need basis):
 
    #+begin_src sh
      ansible-playbook local.yml -K
    #+end_src
 
-   Ansible will use =sudo= when required. =-K= will ask for the user
-   password.
+   =-K= tells Ansible to ask for the user password in order to use
+   =sudo=.
 
 * About =ansible-pull=
 
@@ -76,7 +90,7 @@ configuration instructions from git, and then run ansible-playbook
 against that content.
 #+end_quote
 
-Thus, I can also launch the script with:
+Thus, I could also launch the script with:
 
 #+begin_src sh
   ansible-pull -U https://github.com/alecigne/ansible-desktop.git -K -C [branch]
@@ -90,9 +104,16 @@ I prefer the more detailed output of =ansible-playbook=.
   itself to Github (SSH key) or a SSH keypair must be created
   beforehand as a manual step.
 
-- [ ] Do not re-execute Stow every time
+- [X] Do not re-execute Stow every time
+
+- [ ] Customize the Debian installation. Interesting links:
+
+  + [[https://www.debian.org/releases/buster/amd64/apb.en.html][Preseeding]]
+  + [[https://wiki.debian.org/DebianCustomCD][Building a Custom Debian CD Set]]
+  + [[https://wiki.debian.org/Simple-CDD][=simple-cdd=]]
 
 - Packages to add:
 
   + [ ] =veracrypt= \\
     Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
+  + [ ] =signal-desktop=
