@@ -8,5 +8,8 @@
 
   tasks:
     - include: tasks/packages.yml
-    - include: tasks/home.yml
     - include: tasks/system-config.yml
+    - include: tasks/oh-my-zsh.yml
+    - include: tasks/home.yml
+    - include: tasks/my-utils.yml
+    - include: tasks/dotfiles.yml

@@ -1,0 +1,45 @@
+- name: Clone dotfiles
+  git:
+    repo: git@github.com:alecigne/dotfiles.git
+    dest: "{{ ansible_env.HOME }}/etc/dotfiles"
+    update: no
+    # Do not init submodules - some of them can be unreachable (local network)
+    recursive: no
+
+- name: Init/update submodules from Github
+  command: chdir={{ ansible_env.HOME }}/etc/dotfiles git submodule update --init -- emacs/.emacs.d stumpwm/.stumpwm.d
+  register: update_github_submodules
+  changed_when: update_github_submodules.stdout != ""
+
+- name: Check if the pass repository exists on my local network
+  command: git ls-remote -h alc@192.168.1.30:/home/alc/usbdrv/password-store.git &> /dev/null
+  register: check_pass_repo
+  ignore_errors: yes
+  changed_when: false
+
+- name: Init/update submodules from network
+  command: chdir={{ ansible_env.HOME }}/tmp/ansible-test/dotfiles git submodule update --init -- password-store/.password-store
+  when: check_pass_repo.rc == 0
+
+- name: Stow configurations
+  command: chdir={{ ansible_env.HOME }}/etc/dotfiles bash stow.bash
+  register: stow_result
+  changed_when: stow_result.stderr != ""
+
+- name: Apply correct permissions to .gnupg dirs (700)
+  command: find {{ ansible_env.HOME }}/.gnupg -type d -exec chmod -c 700 {} \;
+  register: chmod_result
+  changed_when: chmod_result.stdout != ""
+
+- name: Apply correct permissions to .gnupg files (600)
+  command: find -L {{ ansible_env.HOME }}/.gnupg -type f -exec chmod -c 600 {} \;
+  register: chmod_result
+  changed_when: chmod_result.stdout != ""
+
+# Doesn't work!
+# - name: Apply correct permissions to .gnupg
+#   file:
+#     path: "{{ ansible_env.HOME }}/etc/dotfiles/gnupg/.gnupg"
+#     state: directory
+#     recurse: yes
+#     mode: u=rw-x+X,g=-rwx,o=-rwx

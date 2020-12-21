@@ -27,15 +27,12 @@ This short documentation acts as a personal reminder :)
 3. Install Debian. I set up an encrypted LVM and I install the
    standard system utilities only.
 
-4. [as root] Edit =/etc/apt/sources.list=:
+4. [as root] Edit =/etc/apt/sources.list=; I use =unstable=:
 
-   #+begin_src conf
-     deb http://deb.debian.org/debian/ [debian-version] main contrib non-free
-     deb-src http://deb.debian.org/debian/ [debian-version] main contrib non-free
-   #+end_src
-
-   =debian-version= must be replaced with the version of Debian that I
-   want to install, usually =testing= or =unstable=.
+   #+begin_example
+     deb http://deb.debian.org/debian/ unstable main contrib non-free
+     deb-src http://deb.debian.org/debian/ unstable main contrib non-free
+   #+end_example
 
 5. [as root] Upgrade the system:
 
@@ -64,13 +61,28 @@ This short documentation acts as a personal reminder :)
 
 ** Running the installation playbook
 
-1. Clone the repository:
+1. Generate a SSH key pair and add the public key to Github for the
+   new workstation:
+
+   #+begin_src sh
+     ssh-keygen -t ed25519 -C "email@example.com"
+     scp ~/.ssh/id_ed25519.pub alc@[ip]:/home/alc
+   #+end_src
+
+2. Update the SSH agent:
+
+   #+begin_src sh
+     eval $(ssh-agent -s)
+     ssh-add
+   #+end_src
+
+3. Clone the repository:
 
    #+begin_src sh
      git clone git@github.com:alecigne/ansible-desktop.git
    #+end_src
 
-2. In the repo's directory, launch the Ansible playbook as a user
+4. In the repo's directory, launch the Ansible playbook as a user
    (Ansible will use =sudo= on a per-need basis):
 
    #+begin_src sh
@@ -100,7 +112,7 @@ I prefer the more detailed output of =ansible-playbook=.
 
 * Tasks
 
-- [ ] Pull dotfiles submodules. The new workstation must register
+- [X] Pull dotfiles submodules. The new workstation must register
   itself to Github (SSH key) or a SSH keypair must be created
   beforehand as a manual step.
 
@@ -117,3 +129,6 @@ I prefer the more detailed output of =ansible-playbook=.
   + [ ] =veracrypt= \\
     Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
   + [ ] =signal-desktop=
+
+- [ ] Study the difference between =import= and =include= and act
+  accordingly

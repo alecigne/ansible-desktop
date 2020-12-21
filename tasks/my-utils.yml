@@ -1,0 +1,17 @@
+- name: Clone personal utils
+  git:
+    repo: git@github.com:alecigne/my-utils.git
+    dest: "{{ ansible_env.HOME }}/src/scripts"
+
+- name: Find personal scripts
+  find:
+    paths: "{{ ansible_env.HOME }}/src/scripts"
+    patterns: "*.bash"
+  register: find
+
+- name: Symlink personal scripts
+  file:
+    src: "{{ item.path }}"
+    path: "{{ ansible_env.HOME }}/bin/{{ (item.path | basename | splitext)[0] }}"
+    state: link
+  with_items: "{{ find.files }}"
