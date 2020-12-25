@@ -1,0 +1,29 @@
+---
+packages:
+  - alttab
+  - aptitude
+  - emacs
+  - feh
+  - firefox
+  - ghostscript
+  - gnupg
+  - i3
+  - imagemagick
+  - ledger
+  - mupdf
+  - ncdu
+  - network-manager
+  - numlockx
+  - pandoc
+  - pass
+  - redshift
+  - restic
+  - rofi
+  - rxvt-unicode
+  - stow
+  - tmux
+  - tree
+  - vlc
+  - xclip
+  - xorg
+  - zsh

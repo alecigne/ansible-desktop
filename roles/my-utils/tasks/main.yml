@@ -1,3 +1,4 @@
+---
 - name: Clone personal utils
   git:
     repo: git@github.com:alecigne/my-utils.git

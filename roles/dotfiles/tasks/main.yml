@@ -1,3 +1,4 @@
+---
 - name: Clone dotfiles
   git:
     repo: git@github.com:alecigne/dotfiles.git

@@ -86,7 +86,7 @@ This short documentation acts as a personal reminder :)
    (Ansible will use =sudo= on a per-need basis):
 
    #+begin_src sh
-     ansible-playbook local.yml -K
+     ansible-playbook playbook.yml -K
    #+end_src
 
    =-K= tells Ansible to ask for the user password in order to use

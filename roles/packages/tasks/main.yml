@@ -1,0 +1,8 @@
+---
+- name: Install packages from apt
+  become: yes
+  become_method: sudo
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+    state: present

@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  roles:
+    - packages
+    - java
+    - system-config
+    - oh-my-zsh
+    - home
+    - my-utils
+    - dotfiles

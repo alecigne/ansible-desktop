@@ -1,3 +1,4 @@
+---
 - name: Install oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh

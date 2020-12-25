@@ -1,3 +1,4 @@
+---
 - name: Create directory structure
   file: path="{{ item }}" state=directory
   with_items:
