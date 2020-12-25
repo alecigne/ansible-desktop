@@ -8,11 +8,21 @@
 
 - name: Check if Eclipse is installed in homedir
   stat:
-    path: "{{ eclipse_home }}/eclipse"
+    path: "{{ eclipse_install_dir }}/eclipse"
   register: eclipse_binary
 
-- include_tasks: eclipse.yml
+- name: Install Eclipse
+  include_tasks: eclipse.yml
   when: not eclipse_binary.stat.exists
+
+- name: Check if IntelliJ is installed in homedir
+  stat:
+    path: "{{ intellij_install_dir }}/bin/idea.sh"
+  register: intellij_binary
+
+- name: Install IntelliJ
+  include_tasks: intellij.yml
+  when: not intellij_binary.stat.exists
 
 - name: Install Maven and Gradle
   become: yes
