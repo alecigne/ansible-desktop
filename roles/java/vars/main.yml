@@ -1,0 +1,3 @@
+---
+eclipse_url: "http://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-jee-2020-12-R-linux-gtk-x86_64.tar.gz"
+eclipse_home: "{{ ansible_env.HOME }}/bin/eclipse.d"

@@ -1,0 +1,15 @@
+---
+- name: Install OpenJDK 11
+  become: yes
+  apt:
+    update-cache: yes
+    name: openjdk-11-jdk
+    state: present
+
+- name: Check if Eclipse is installed in homedir
+  stat:
+    path: "{{ eclipse_home }}/eclipse"
+  register: eclipse_binary
+
+- include_tasks: eclipse.yml
+  when: not eclipse_binary.stat.exists

@@ -92,6 +92,12 @@ This short documentation acts as a personal reminder :)
    =-K= tells Ansible to ask for the user password in order to use
    =sudo=.
 
+   With tags:
+
+   #+begin_src sh
+     ansible-playbook playbook.yml -K --tags [tags]
+   #+end_src
+
 * About =ansible-pull=
 
 From the Ansible documentation:
@@ -132,3 +138,7 @@ I prefer the more detailed output of =ansible-playbook=.
 
 - [ ] Study the difference between =import= and =include= and act
   accordingly
+
+- [X] Switch from tasks to roles
+
+- [ ] Read about Molecule

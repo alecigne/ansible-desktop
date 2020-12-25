@@ -1,0 +1,20 @@
+---
+- name: Create Eclipse directory in home dir
+  file:
+    dest="{{ eclipse_home }}"
+    state=directory
+
+- name: Download and extract Eclipse in home dir
+  unarchive:
+    src: "{{ eclipse_url }}"
+    dest: "{{ eclipse_home }}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+  register: eclipse_download
+
+- name: Symlink Eclipse binary
+  file:
+    src: "{{ eclipse_home }}/eclipse"
+    path: "{{ ansible_env.HOME }}/bin/eclipse"
+    state: link
+  when: eclipse_download.changed
