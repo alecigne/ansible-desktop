@@ -1,6 +1,7 @@
 ---
 packages:
   - aptitude
+  - cmus
   - emacs
   - ghostscript
   - gnupg
