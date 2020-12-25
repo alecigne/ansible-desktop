@@ -1,0 +1,22 @@
+---
+- name: Get zsh path
+  command: which zsh
+  register: zsh_path
+  changed_when: false
+
+- name: Change shell to zsh
+  user: name=alc shell={{ zsh_path.stdout }}
+  become: yes
+
+- name: Install oh-my-zsh
+  git:
+    repo: "{{ oh_my_zsh_repo }}"
+    dest: "{{ oh_my_zsh_dest }}"
+    force: yes
+
+- name: Install powerlevel10k
+  git:
+    repo: "{{ powerlevel10k_repo }}"
+    depth: 1
+    dest: "{{ powerlevel10k_dest }}"
+    force: yes

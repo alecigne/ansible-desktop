@@ -1,0 +1,16 @@
+---
+packages:
+  - aptitude
+  - emacs
+  - ghostscript
+  - gnupg
+  - ledger
+  - ncdu
+  - network-manager
+  - pandoc
+  - pass
+  - restic
+  - stow
+  - tmux
+  - tree
+  - zsh

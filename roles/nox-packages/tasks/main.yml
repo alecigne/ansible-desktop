@@ -1,0 +1,6 @@
+---
+- name: Install nox packages
+  include_role:
+    name: apt-meta
+  vars:
+    apt_packages: "{{ packages }}"

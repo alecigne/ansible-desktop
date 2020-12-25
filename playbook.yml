@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
   roles:
-    - packages
-    - {role: "java", tags: "java"}
-    - system-config
-    - oh-my-zsh
+    - nox-packages
+    - {role: "x-packages", tags: "x"}
+    - zsh
     - home
     - my-utils
     - dotfiles
+    - {role: "java", tags: "java"}

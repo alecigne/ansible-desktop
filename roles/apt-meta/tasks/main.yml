@@ -4,5 +4,6 @@
   become_method: sudo
   apt:
     update_cache: yes
-    name: "{{ packages }}"
+    autoclean: yes
+    name: "{{ apt_packages }}"
     state: present

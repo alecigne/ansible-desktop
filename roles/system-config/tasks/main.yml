@@ -1,9 +1,0 @@
----
-- name: Get zsh path
-  command: which zsh
-  register: zsh_path
-  changed_when: false
-
-- name: Change shell to zsh
-  user: name=alc shell={{ zsh_path.stdout }}
-  become: yes

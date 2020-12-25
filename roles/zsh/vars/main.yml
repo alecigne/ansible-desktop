@@ -1,0 +1,5 @@
+---
+oh_my_zsh_repo: "https://github.com/robbyrussell/oh-my-zsh"
+oh_my_zsh_dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+powerlevel10k_repo: "https://github.com/romkatv/powerlevel10k"
+powerlevel10k_dest: "{{ oh_my_zsh_dest }}/custom/themes/powerlevel10k"
