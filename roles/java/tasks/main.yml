@@ -13,3 +13,12 @@
 
 - include_tasks: eclipse.yml
   when: not eclipse_binary.stat.exists
+
+- name: Install Maven and Gradle
+  become: yes
+  apt:
+    update-cache: yes
+    name:
+      - maven
+      - gradle
+    state: present
