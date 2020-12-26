@@ -14,7 +14,13 @@
     - "{{ ansible_env.HOME }}/tmp"
     - "{{ ansible_env.HOME }}/tmp/screenshots"
 
+- name: Check if Drone Zone media file exists
+  stat:
+    path: "{{ drone_zone_file }}"
+  register: drone_zone_result
+
 - name: Download Drone Zone media file
   get_url:
     url: "{{ drone_zone_url }}"
-    dest: "{{ drone_zone_dir }}"
+    dest: "{{ drone_zone_file }}"
+  when: not drone_zone_result.stat.exists
