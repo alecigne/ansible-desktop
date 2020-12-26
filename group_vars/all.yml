@@ -1,0 +1,11 @@
+---
+bin_dir: "{{ ansible_env.HOME }}/bin"
+dat_dir: "{{ ansible_env.HOME }}/dat"
+etc_dir: "{{ ansible_env.HOME }}/etc"
+ibx_dir: "{{ ansible_env.HOME }}/ibx"
+med_dir: "{{ ansible_env.HOME }}/med"
+mnt_dir: "{{ ansible_env.HOME }}/mnt"
+org_dir: "{{ ansible_env.HOME }}/org"
+pub_dir: "{{ ansible_env.HOME }}/pub"
+src_dir: "{{ ansible_env.HOME }}/src"
+tmp_dir: "{{ ansible_env.HOME }}/tmp"

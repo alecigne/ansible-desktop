@@ -15,6 +15,6 @@
 - name: Symlink Eclipse binary
   file:
     src: "{{ eclipse_install_dir }}/eclipse"
-    path: "{{ ansible_env.HOME }}/bin/eclipse"
+    path: "{{ bin_dir }}/eclipse"
     state: link
   when: eclipse_download.changed

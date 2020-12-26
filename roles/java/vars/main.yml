@@ -9,7 +9,7 @@ java_packages:
 # Eclipse
 
 eclipse_download_url: "http://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-jee-2020-12-R-linux-gtk-x86_64.tar.gz"
-eclipse_install_dir: "{{ ansible_env.HOME }}/bin/eclipse.d"
+eclipse_install_dir: "{{ bin_dir }}/eclipse.d"
 
 # IntelliJ
 
@@ -19,4 +19,4 @@ intellij_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '
 intellij_filename: "{{ intellij_edition }}-{{ intellij_version }}.tar.gz"
 intellij_download_url: "http://download.jetbrains.com/idea/{{ intellij_filename }}"
 intellij_download_path: "{{ intellij_download_dir }}/{{ intellij_filename }}"
-intellij_install_dir: "{{ ansible_env.HOME }}/bin/intellij.d"
+intellij_install_dir: "{{ bin_dir }}/intellij.d"

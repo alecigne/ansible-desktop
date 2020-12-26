@@ -31,5 +31,5 @@
 - name: Symlink IntelliJ binary
   file:
     src: "{{ intellij_install_dir }}/bin/idea.sh"
-    path: "{{ ansible_env.HOME }}/bin/intellij"
+    path: "{{ bin_dir }}/intellij"
     state: link

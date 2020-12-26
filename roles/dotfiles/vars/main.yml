@@ -1,0 +1,4 @@
+---
+dotfiles_repo: git@github.com:alecigne/dotfiles.git
+dotfiles_dir: "{{ etc_dir }}/dotfiles"
+pass_repo: alc@192.168.1.30:/home/alc/usbdrv/password-store.git

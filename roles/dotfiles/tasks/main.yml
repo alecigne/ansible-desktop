@@ -1,29 +1,29 @@
 ---
 - name: Clone dotfiles
   git:
-    repo: git@github.com:alecigne/dotfiles.git
-    dest: "{{ ansible_env.HOME }}/etc/dotfiles"
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dir }}"
     update: no
     # Do not init submodules - some of them can be unreachable (local network)
     recursive: no
 
 - name: Init/update submodules from Github
-  command: chdir={{ ansible_env.HOME }}/etc/dotfiles git submodule update --init -- emacs/.emacs.d stumpwm/.stumpwm.d
+  command: chdir="{{ dotfiles_dir }}" git submodule update --init -- emacs/.emacs.d stumpwm/.stumpwm.d
   register: update_github_submodules
   changed_when: update_github_submodules.stdout != ""
 
 - name: Check if the pass repository exists on my local network
-  command: git ls-remote -h alc@192.168.1.30:/home/alc/usbdrv/password-store.git &> /dev/null
+  command: git ls-remote -h {{ pass_repo }} &> /dev/null
   register: check_pass_repo
   ignore_errors: yes
   changed_when: false
 
 - name: Init/update submodules from network
-  command: chdir={{ ansible_env.HOME }}/tmp/ansible-test/dotfiles git submodule update --init -- password-store/.password-store
+  command: chdir="{{ dotfiles_dir }}" git submodule update --init -- password-store/.password-store
   when: check_pass_repo.rc == 0
 
 - name: Stow configurations
-  command: chdir={{ ansible_env.HOME }}/etc/dotfiles bash stow.bash
+  command: chdir={{ dotfiles_dir }} bash stow.bash
   register: stow_result
   changed_when: stow_result.stderr != ""
 

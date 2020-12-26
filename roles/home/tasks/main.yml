@@ -1,18 +1,7 @@
 ---
 - name: Create directory structure
   file: path="{{ item }}" state=directory
-  with_items:
-    - "{{ ansible_env.HOME }}/bin"
-    - "{{ ansible_env.HOME }}/dat"
-    - "{{ ansible_env.HOME }}/etc"
-    - "{{ ansible_env.HOME }}/ibx"
-    - "{{ ansible_env.HOME }}/med"
-    - "{{ ansible_env.HOME }}/mnt"
-    - "{{ ansible_env.HOME }}/org"
-    - "{{ ansible_env.HOME }}/pub"
-    - "{{ ansible_env.HOME }}/src"
-    - "{{ ansible_env.HOME }}/tmp"
-    - "{{ ansible_env.HOME }}/tmp/screenshots"
+  with_items: "{{ directories }}"
 
 - name: Check if Drone Zone media file exists
   stat:

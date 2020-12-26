@@ -13,6 +13,6 @@
 - name: Symlink personal scripts
   file:
     src: "{{ item.path }}"
-    path: "{{ ansible_env.HOME }}/bin/{{ (item.path | basename | splitext)[0] }}"
+    path: "{{ bin_dir }}/{{ (item.path | basename | splitext)[0] }}"
     state: link
   with_items: "{{ find.files }}"
