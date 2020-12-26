@@ -1,12 +1,12 @@
 ---
 - name: Clone personal utils
   git:
-    repo: git@github.com:alecigne/my-utils.git
-    dest: "{{ ansible_env.HOME }}/src/scripts"
+    repo: "{{ my_utils_repo }}"
+    dest: "{{ my_utils_src_dir }}"
 
 - name: Find personal scripts
   find:
-    paths: "{{ ansible_env.HOME }}/src/scripts"
+    paths: "{{ my_utils_src_dir }}"
     patterns: "*.bash"
   register: find
 

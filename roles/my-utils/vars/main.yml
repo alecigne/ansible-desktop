@@ -1,0 +1,3 @@
+---
+my_utils_repo: "git@github.com:alecigne/my-utils.git"
+my_utils_src_dir: "{{ ansible_env.HOME }}/src/alecigne/scripts"
