@@ -1,4 +1,11 @@
 ---
+# Java packages
+
+java_packages:
+  - openjdk-11-jdk
+  - maven
+  - gradle
+
 # Eclipse
 
 eclipse_download_url: "http://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-jee-2020-12-R-linux-gtk-x86_64.tar.gz"

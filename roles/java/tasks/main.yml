@@ -1,10 +1,9 @@
 ---
-- name: Install OpenJDK 11
-  become: yes
-  apt:
-    update-cache: yes
-    name: openjdk-11-jdk
-    state: present
+- name: Install Java packages from APT
+  include_role:
+    name: apt-meta
+  vars:
+    apt_packages: "{{ java_packages }}"
 
 - name: Check if Eclipse is installed in homedir
   stat:
@@ -23,12 +22,3 @@
 - name: Install IntelliJ
   include_tasks: intellij.yml
   when: not intellij_binary.stat.exists
-
-- name: Install Maven and Gradle
-  become: yes
-  apt:
-    update-cache: yes
-    name:
-      - maven
-      - gradle
-    state: present
