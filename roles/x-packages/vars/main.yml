@@ -3,6 +3,7 @@ packages:
   - alttab
   - feh
   - firefox
+  - gimp
   - i3
   - imagemagick
   - mupdf
