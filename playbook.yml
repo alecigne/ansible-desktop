@@ -3,6 +3,7 @@
   roles:
     - nox-packages
     - {role: "x-packages", tags: "x"}
+    - system-config
     - zsh
     - home
     - my-utils

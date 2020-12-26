@@ -1,0 +1,4 @@
+---
+blacklist_file: /etc/modprobe.d/blacklist.conf
+blacklisted_modules:
+  - pcspkr
