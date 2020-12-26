@@ -1,0 +1,3 @@
+---
+drone_zone_url: https://somafm.com/dronezone256.pls
+drone_zone_dir: "{{ ansible_env.HOME }}/med"

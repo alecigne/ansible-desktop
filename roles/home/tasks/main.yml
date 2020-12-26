@@ -6,9 +6,15 @@
     - "{{ ansible_env.HOME }}/dat"
     - "{{ ansible_env.HOME }}/etc"
     - "{{ ansible_env.HOME }}/ibx"
+    - "{{ ansible_env.HOME }}/med"
     - "{{ ansible_env.HOME }}/mnt"
     - "{{ ansible_env.HOME }}/org"
     - "{{ ansible_env.HOME }}/pub"
     - "{{ ansible_env.HOME }}/src"
     - "{{ ansible_env.HOME }}/tmp"
     - "{{ ansible_env.HOME }}/tmp/screenshots"
+
+- name: Download Drone Zone media file
+  get_url:
+    url: "{{ drone_zone_url }}"
+    dest: "{{ drone_zone_dir }}"
