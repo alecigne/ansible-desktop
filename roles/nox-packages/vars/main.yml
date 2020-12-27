@@ -11,6 +11,7 @@ packages:
   - network-manager
   - pandoc
   - pass
+  - rclone
   - restic
   - stow
   - tmux

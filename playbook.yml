@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   roles:
+    - ansible-requirements
     - nox-packages
     - {role: "x-packages", tags: "x"}
     - system-config
@@ -9,3 +10,7 @@
     - my-utils
     - dotfiles
     - {role: "java", tags: "java"}
+  vars_prompt:
+    - name: "gpg_passphrase"
+      prompt: "Enter GPG passphrase"
+      private: yes

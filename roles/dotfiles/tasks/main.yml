@@ -23,9 +23,13 @@
   when: check_pass_repo.rc == 0
 
 - name: Stow configurations
-  command: chdir={{ dotfiles_dir }} bash stow.bash
+  expect:
+    chdir: "{{ dotfiles_dir }}"
+    command: bash stow.bash
+    responses:
+      (?i)passphrase: "{{ gpg_passphrase }}"
   register: stow_result
-  changed_when: stow_result.stderr != ""
+  changed_when: stow_result.stdout != ""
 
 - name: Apply correct permissions to .gnupg dirs (700)
   command: find {{ ansible_env.HOME }}/.gnupg -type d -exec chmod -c 700 {} \;

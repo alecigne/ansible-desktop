@@ -82,7 +82,9 @@ This short documentation acts as a personal reminder :)
      git clone git@github.com:alecigne/ansible-desktop.git
    #+end_src
 
-4. In the repo's directory, launch the Ansible playbook as a user
+4. [recommended] Import my GnuPG keys.
+
+5. In the repo's directory, launch the Ansible playbook as a user
    (Ansible will use =sudo= on a per-need basis):
 
    #+begin_src sh

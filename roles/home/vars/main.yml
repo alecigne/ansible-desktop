@@ -1,4 +1,6 @@
 ---
+# Homedir structure
+
 directories:
   - "{{ bin_dir }}"
   - "{{ dat_dir }}"
@@ -11,5 +13,13 @@ directories:
   - "{{ src_dir }}"
   - "{{ tmp_dir }}"
   - "{{ tmp_dir }}/screenshots"
+
+# My website
+
+website_repo: "git@github.com:alecigne/lecigne.net.git"
+website_dir: "{{ src_dir }}/alecigne/lecigne.net"
+
+# Music
+
 drone_zone_url: https://somafm.com/dronezone256.pls
 drone_zone_file: "{{ med_dir }}/dz.pls"
