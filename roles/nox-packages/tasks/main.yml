@@ -1,6 +1,13 @@
 ---
+# Nox packages
+
 - name: Install nox packages
   include_role:
     name: apt-meta
   vars:
     apt_packages: "{{ packages }}"
+
+# TinyTeX
+
+- name: Install TinyTeX
+  include_tasks: tinytex.yml

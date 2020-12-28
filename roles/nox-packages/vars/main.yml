@@ -18,3 +18,13 @@ packages:
   - tmux
   - tree
   - zsh
+
+# TinyTeX
+
+tinytex_dir: "{{ ansible_env.HOME }}/.TinyTeX"
+tinytex_download_url: "https://yihui.org/tinytex/install-bin-unix.sh"
+tinytex_required_packages:
+  - capt-of
+  - psnfss
+  - ulem
+  - wrapfig
