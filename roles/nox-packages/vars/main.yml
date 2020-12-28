@@ -1,6 +1,7 @@
 ---
 packages:
   - alsa-utils
+  - apt-listbugs
   - aptitude
   - cmus
   - emacs
