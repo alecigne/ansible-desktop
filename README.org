@@ -144,3 +144,7 @@ I prefer the more detailed output of =ansible-playbook=.
 - [X] Switch from tasks to roles
 
 - [ ] Read about Molecule
+
+- [ ] Deploy Firefox with extensions
+  + https://support.mozilla.org/en-US/kb/deploying-firefox-with-extensions
+  + https://github.com/alzadude/ansible-firefox-addon
