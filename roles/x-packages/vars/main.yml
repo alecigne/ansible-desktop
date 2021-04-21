@@ -1,6 +1,7 @@
 ---
 packages:
   - alttab
+  - anki
   - feh
   - filezilla
   - firefox
