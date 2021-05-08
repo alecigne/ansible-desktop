@@ -4,7 +4,7 @@ packages:
   - anki
   - feh
   - filezilla
-  - firefox
+  - firefox-esr
   - gimp
   - i3
   - imagemagick
