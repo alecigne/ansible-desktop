@@ -11,6 +11,10 @@ I use).
 
 This short documentation acts as a personal reminder :)
 
+*Note*: the Debian installation itself can be automated using
+[[https://www.debian.org/releases/stable/amd64/apb.en.html][preseeding]]. My experimental preseed configuration can be found on the
+=preseed= branch [[https://github.com/alecigne/ansible-desktop/blob/preseed/debian_preseed/preseed.cfg][here]].
+
 ** Installing and upgrading Debian
 
 1. Download a =netinst= ISO image from the [[https://www.debian.org/distrib/netinst][official website]].
