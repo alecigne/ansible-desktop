@@ -1,0 +1,9 @@
+---
+
+apt_repositories:
+  - file: debian-main
+    repo: deb http://deb.debian.org/debian/ testing main contrib non-free
+  - file: debian-updates
+    repo: deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+  - file: debian-security
+    repo: deb http://deb.debian.org/debian-security testing-security main

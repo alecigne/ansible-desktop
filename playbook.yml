@@ -1,4 +1,14 @@
 ---
+
+###
+### Bootstrap System
+###
+- hosts: localhost
+  roles:
+    - dist-upgrade
+  tags:
+    - dist-upgrade
+
 - hosts: localhost
   roles:
     - ansible-requirements
@@ -10,6 +20,8 @@
     - my-utils
     - dotfiles
     - {role: "java", tags: "java"}
+  tags:
+    - main
   vars_prompt:
     - name: "gpg_passphrase"
       prompt: "Enter GPG passphrase"

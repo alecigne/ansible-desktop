@@ -11,11 +11,14 @@ I use).
 
 This short documentation acts as a personal reminder :)
 
+** Basic Debian installation
+:PROPERTIES:
+:CREATED:  [2021-08-19 Thu 19:14]
+:END:
+
 *Note*: the Debian installation itself can be automated using
 [[https://www.debian.org/releases/stable/amd64/apb.en.html][preseeding]]. My experimental preseed configuration can be found on the
 =preseed= branch [[https://github.com/alecigne/ansible-desktop/blob/preseed/debian_preseed/preseed.cfg][here]].
-
-** Installing and upgrading Debian
 
 1. Download a =netinst= ISO image from the [[https://www.debian.org/distrib/netinst][official website]].
 
@@ -28,99 +31,56 @@ This short documentation acts as a personal reminder :)
    I usually use =lsblk= to know the path to the USB drive. *Be
    careful*, as choosing the wrong path might cause serious damage.
 
-3. Install Debian. I set up an encrypted LVM and I install the
-   standard system utilities only.
+3. Install Debian. I usually set up an encrypted LVM and I install the
+   standard system utilities only (i.e., no desktop environment such
+   as GNOME, and no X server - Ansible will install X and the i3
+   window manager).
 
-4. [as root] Edit =/etc/apt/sources.list=; I use =unstable=:
+** System config and running the bootstrapping script
+:PROPERTIES:
+:CREATED:  [2021-08-19 Thu 19:15]
+:END:
 
-   #+begin_example
-     deb http://deb.debian.org/debian/ unstable main contrib non-free
-     deb-src http://deb.debian.org/debian/ unstable main contrib non-free
-   #+end_example
-
-5. [as root] Upgrade the system:
-
-   #+begin_src sh
-     apt update && apt upgrade
-   #+end_src
-
-** Installing and configuring necessary packages
-
-1. [as root] Install Ansible, Git and sudo:
+1. [as root] Install =sudo= and =gpg=. Add the user to the =sudo=
+   group:
 
    #+begin_src sh
-     apt install ansible git sudo
+     usermod -aG sudo [user]
    #+end_src
 
-   - Ansible is needed for... running our Ansible setup!
-   - Ansible needs =git= for cloning repos and =sudo= for running some
-     commands. Besides, I need =git= to clone this repo on the
-     machine.
+   Log off and in again to take this change into account.
 
-2. [as root] Add yourself to the =sudoers= file:
-
-   #+begin_src sh
-     echo "alc ALL=(ALL:ALL) ALL" > /etc/sudoers.d/alc
-   #+end_src
-
-** Running the installation playbook
-
-1. Generate a SSH key pair and add the public key to Github for the
-   new workstation:
+2. Generate a SSH key pair:
 
    #+begin_src sh
      ssh-keygen -t ed25519 -C "email@example.com"
-     scp ~/.ssh/id_ed25519.pub alc@[ip]:/home/alc
    #+end_src
 
-2. Update the SSH agent:
+   Update the SSH agent:
 
    #+begin_src sh
      eval $(ssh-agent -s)
      ssh-add
    #+end_src
 
-3. Clone the repository:
+   Add the public key to Github for the new workstation so Ansible can
+   clone my repos using SSH.
+
+3. Import my GnuPG keys to decrypt sensible data.
 
    #+begin_src sh
-     git clone git@github.com:alecigne/ansible-desktop.git
+     gpg --import private.key
    #+end_src
 
-4. [recommended] Import my GnuPG keys.
-
-5. In the repo's directory, launch the Ansible playbook as a user
-   (Ansible will use =sudo= on a per-need basis):
+4. Call the bootstrapping script:
 
    #+begin_src sh
-     ansible-playbook playbook.yml -K
+     wget -qO - https://raw.githubusercontent.com/alecigne/ansible-desktop/develop/bootstrap.bash | bash
    #+end_src
 
-   =-K= tells Ansible to ask for the user password in order to use
-   =sudo=.
-
-   With tags:
-
-   #+begin_src sh
-     ansible-playbook playbook.yml -K --tags [tags]
-   #+end_src
-
-* About =ansible-pull=
-
-From the Ansible documentation:
-
-#+begin_quote
-The ansible-pull is a small script that will checkout a repo of
-configuration instructions from git, and then run ansible-playbook
-against that content.
-#+end_quote
-
-Thus, I could also launch the script with:
-
-#+begin_src sh
-  ansible-pull -U https://github.com/alecigne/ansible-desktop.git -K -C [branch]
-#+end_src
-
-I prefer the more detailed output of =ansible-playbook=.
+   The bootstrapping script will install Git and Ansible then use
+   Ansible to switch from Debian stable to Debian testing. It will use
+   the up-to-date version of Ansible to continue the installation.
 
 * Tasks
 
@@ -129,6 +89,10 @@ I prefer the more detailed output of =ansible-playbook=.
   beforehand as a manual step.
 
 - [X] Do not re-execute Stow every time
+
+- [X] Reduce manual steps to a minimum
+
+- [X] Switch from tasks to roles
 
 - [ ] Customize the Debian installation. Interesting links:
 
@@ -144,8 +108,6 @@ I prefer the more detailed output of =ansible-playbook=.
 
 - [ ] Study the difference between =import= and =include= and act
   accordingly
-
-- [X] Switch from tasks to roles
 
 - [ ] Read about Molecule
 
