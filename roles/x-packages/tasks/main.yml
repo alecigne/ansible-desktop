@@ -1,6 +1,0 @@
----
-- name: Install x packages
-  include_role:
-    name: apt-meta
-  vars:
-    apt_packages: "{{ packages }}"

@@ -6,4 +6,4 @@
     update_cache: yes
     autoclean: yes
     name: "{{ apt_packages }}"
-    state: present
+    state: "{{ apt_state }}"

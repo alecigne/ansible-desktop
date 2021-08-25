@@ -1,18 +1,15 @@
 ---
 # Java packages
-
 java_packages:
   - openjdk-11-jdk
   - maven
   - gradle
 
 # Eclipse
-
 eclipse_download_url: "http://mirror.ibcp.fr/pub/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-jee-2020-12-R-linux-gtk-x86_64.tar.gz"
 eclipse_install_dir: "{{ bin_dir }}/eclipse.d"
 
 # IntelliJ
-
 intellij_edition: "ideaIU"
 intellij_version: "2020.3"
 intellij_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"

@@ -3,10 +3,12 @@
   file: path="{{ item }}" state=directory
   with_items: "{{ directories }}"
 
-- name: Clone my website repository
+- name: Clone my projects
   git:
-    repo: "{{ website_repo }}"
-    dest: "{{ website_dir }}"
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - "{{ projects }}"
 
 - name: Check if Drone Zone media file exists
   stat:

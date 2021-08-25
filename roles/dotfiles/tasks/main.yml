@@ -12,16 +12,24 @@
   register: update_github_submodules
   changed_when: update_github_submodules.stdout != ""
 
-- name: Check if the pass repository exists on my local network
-  command: git ls-remote -h {{ pass_repo }} &> /dev/null
-  register: check_pass_repo
-  ignore_errors: yes
-  changed_when: false
+# TODO Check if Raspberry Pi is available on local network
+#- name: Add Raspberry Pi to known hosts
+#  known_hosts:
+#    name: "192.168.1.30"
+#    key: "{{ lookup('pipe', 'ssh-keyscan 192.168.1.30') }}"
+#
+#- name: Check if the pass repository exists on my local network
+#  command: git ls-remote -h {{ pass_repo }} &> /dev/null
+#  register: check_pass_repo
+#  ignore_errors: yes
+#  changed_when: false
 
 - name: Init/update submodules from network
   command: chdir="{{ dotfiles_dir }}" git submodule update --init -- password-store/.password-store
-  when: check_pass_repo.rc == 0
+  register: update_network_submodules
+  changed_when: update_network_submodules.stdout != ""
 
+# TODO Import my GPG key from controller to host (local_action ?), only if executed from a controller.
 - name: Stow configurations
   expect:
     chdir: "{{ dotfiles_dir }}"
@@ -41,7 +49,7 @@
   register: chmod_result
   changed_when: chmod_result.stdout != ""
 
-# Doesn't work!
+# TODO Doesn't work - understand why
 # - name: Apply correct permissions to .gnupg
 #   file:
 #     path: "{{ ansible_env.HOME }}/etc/dotfiles/gnupg/.gnupg"
