@@ -9,3 +9,59 @@ org_dir: "{{ ansible_env.HOME }}/org"
 pub_dir: "{{ ansible_env.HOME }}/pub"
 src_dir: "{{ ansible_env.HOME }}/src"
 tmp_dir: "{{ ansible_env.HOME }}/tmp"
+screenshot_dir: "{{ tmp_dir }}/screenshots"
+my_src_dir: "{{ src_dir }}/alecigne"
+
+github_access_token: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  62373335386539396362633061373663306332396335613866613763373436666339383735393965
+  6561666134363663646230336233616263393337316263640a636434303836663731306362376139
+  62303962326538653931623931396130353462613236663536616263306133626535613666353938
+  3563303163313066370a366334626535306164623234663238393165656433376238303637393637
+  32366365393361323565613264316433653761343738386362393866323734396530623231343866
+  3933613635663238383031633535653531343532643366383839
+
+rpi_ip: 192.168.1.30
+
+apt_packages:
+  - alsa-utils
+  - alttab
+  - anki
+  # - apt-listbugs
+  - aptitude
+  - cmus
+  - emacs
+  - feh
+  - filezilla
+  - firefox-esr
+  - ghostscript
+  - gimp
+  - gnupg
+  - i3
+  - imagemagick
+  - ledger
+  - mupdf
+  - ncdu
+  - network-manager
+  - numlockx
+  - pandoc
+  - pass
+  - rclone
+  - redshift
+  - restic
+  - ripgrep
+  - rofi
+  - rxvt-unicode
+  - stow
+  - stow
+  - tmux
+  - tree
+  - vlc
+  - xclip
+  - xorg
+
+tinytex_required_packages:
+  - capt-of
+  - psnfss
+  - ulem
+  - wrapfig

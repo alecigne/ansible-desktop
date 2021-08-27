@@ -1,4 +1,10 @@
 ---
+- name: Install zsh
+  include_role:
+    name: apt-install
+  vars:
+    apt_packages: zsh
+
 - name: Get zsh path
   command: which zsh
   register: zsh_path
@@ -8,10 +14,19 @@
   user: name=alc shell={{ zsh_path.stdout }}
   become: yes
 
+- name: Remove non-zsh dotfiles
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ ansible_env.HOME }}/.bashrc"
+    - "{{ ansible_env.HOME }}/.profile"
+
 - name: Install oh-my-zsh
   git:
     repo: "{{ oh_my_zsh_repo }}"
     dest: "{{ oh_my_zsh_dest }}"
+    # Any modified files in the working repository will be discarded
     force: yes
 
 - name: Install powerlevel10k

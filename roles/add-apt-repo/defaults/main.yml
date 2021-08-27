@@ -1,0 +1,14 @@
+---
+
+apt_repo_state: present
+
+apt_repositories: []
+#  - file: debian-main
+#    repo: deb http://deb.debian.org/debian/ testing main contrib non-free
+
+# Array of apt keys to add (all are optional)
+apt_repo_keys: []
+# - url:
+#   keyserver:
+#   id:
+#   file:

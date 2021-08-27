@@ -1,16 +1,79 @@
 ---
-- hosts: localhost
+- name: Switch from Debian stable to Debian testing
+  hosts: all
+  vars:
+    apt_repositories:
+      - file: debian-main
+        repo: deb http://deb.debian.org/debian/ testing main contrib non-free
+      - file: debian-updates
+        repo: deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+      - file: debian-security
+        repo: deb http://deb.debian.org/debian-security testing-security main
   roles:
-    - ansible-requirements
-    - nox-packages
-    - {role: "x-packages", tags: "x"}
-    - system-config
-    - zsh
-    - home
-    - my-utils
-    - dotfiles
-    - {role: "java", tags: "java"}
+    - add-apt-repo
+    - system-upgrade
+  tags: [debian-upgrade]
+
+- name: Blacklist some modules
+  hosts: all
+  vars:
+    blacklisted_modules: [pcspkr]
+  roles: [blacklist-modules]
+  tags: [blacklist-modules]
+
+- name: Install requirements for Ansible
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensuite python3-pip is installed
+      apt:
+        update_cache: yes
+        name:
+          - python3-pip
+    - name: Ensuite pexpect is installed
+      pip:
+        name: pexpect
+  tags: [ansible-requirements]
+
+- name: Install required packages from apt
+  hosts: all
+  roles: [apt-install]
+  tags: [apt-install]
+
+- name: Install and configure zsh + oh-my-zsh
+  hosts: all
+  roles: [zsh]
+  tags: [zsh]
+
+- name: Install TinyTex
+  hosts: all
+  roles: [tinytex]
+  tags: [tinytex]
+
+- name: Create and deploy a new SSH key
+  hosts: all
+  vars_prompt:
+    - name: "raspberry_pi_password"
+      prompt: "Enter Raspberry Pi password"
+      private: yes
+  roles: [ssh-key]
+  tags: [ssh-key]
+
+- name: Prepare my home directory
+  hosts: all
+  roles: [homedir]
+  tags: [homedir]
+
+- name: Setup my dotfiles
+  hosts: all
   vars_prompt:
     - name: "gpg_passphrase"
       prompt: "Enter GPG passphrase"
       private: yes
+  roles: [dotfiles]
+  tags: [dotfiles]
+
+- name: Setup my personal scripts
+  hosts: all
+  roles: [my-utils]
+  tags: [my-utils]

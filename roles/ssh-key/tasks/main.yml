@@ -1,0 +1,31 @@
+---
+# TODO Protect with password
+- name: Generate a new SSH key
+  openssh_keypair:
+    path: "~/.ssh/{{ ssh_key_name }}"
+    type: ed25519
+  register: ssh_key
+
+- name: Deploy key to Github
+  uri:
+    url: "https://api.github.com/user/keys"
+    method: POST
+    body:
+      title: "{{ lookup('file', '/etc/machine-id') }}"
+      key: "{{ ssh_key.public_key }}"
+      read_only: false
+    body_format: json
+    status_code:
+      - 201
+      - 200
+      - 422
+    headers:
+      Authorization: "token {{ github_access_token }}"
+
+- name: Deploy key to Raspberry Pi
+  expect:
+    command: "ssh-copy-id -i {{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }} alc@{{ rpi_ip }}"
+    responses:
+      (?i)password: "{{ raspberry_pi_password }}"
+  register: output
+  changed_when: "'All keys were skipped because they already exist on the remote system' not in output.stdout"

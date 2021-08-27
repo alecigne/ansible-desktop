@@ -1,0 +1,31 @@
+---
+# Homedir structure
+directories:
+  - "{{ bin_dir }}"
+  - "{{ dat_dir }}"
+  - "{{ etc_dir }}"
+  - "{{ ibx_dir }}"
+  - "{{ med_dir }}"
+  - "{{ mnt_dir }}"
+  - "{{ org_dir }}"
+  - "{{ pub_dir }}"
+  - "{{ src_dir }}"
+  - "{{ tmp_dir }}"
+  - "{{ screenshot_dir }}"
+  - "{{ my_src_dir }}"
+
+# Git projects
+projects:
+  # My website
+  - repo: "git@github.com:alecigne/lecigne.net.git"
+    dest: "{{ my_src_dir }}/lecigne.net"
+  # My "coding katas"
+  - repo: "git@github.com:alecigne/coding-katas.git"
+    dest: "{{ my_src_dir }}/coding-katas"
+  # Coronabot
+  - repo: "git@github.com:alecigne/coronabot.git"
+    dest: "{{ my_src_dir }}/coronabot"
+
+# Music
+drone_zone_url: https://somafm.com/dronezone256.pls
+drone_zone_file: "{{ med_dir }}/dz.pls"

@@ -1,0 +1,20 @@
+---
+- name: Check if TinyTeX is already installed
+  stat:
+    path: "{{ tinytex_dir }}"
+  register: tinytex_result
+
+- name: Proceed with TinyTex installation
+  block:
+    - name: Execute TinyTeX installation script
+      shell: "wget -qO- {{ tinytex_download_url }} | sh"
+
+    - name: Check which packages are already installed
+      shell: "{{ bin_dir }}/tlmgr list --only-installed | cut -f1 -d \":\" | cut -c 3- | tr '\r\n' ' '"
+      register: tinytex_installed_packages
+
+    - name: Install missing LaTeX packages
+      command: "{{ bin_dir }}/tlmgr install {{ item }}"
+      with_items: "{{ tinytex_required_packages }}"
+      when: not item in tinytex_installed_packages.stdout
+  when: not tinytex_result.stat.exists
