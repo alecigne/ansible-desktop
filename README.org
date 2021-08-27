@@ -53,6 +53,8 @@ This short documentation acts as a personal reminder :)
 :CREATED:  [2021-08-25 Wed 21:52]
 :END:
 
+There are 3 ways to execute the Ansible playbook.
+
 *** Run from a controller
 :PROPERTIES:
 :CREATED:  [2021-08-27 Fri 13:50]
@@ -90,15 +92,15 @@ machine on my local network.
    #+RESULTS:
 
    - =--ask-pass= is necessary for the SSH connection (=sshpass= is
-     installed on the controller).
+     installed on the controller). This could also be done using SSH
+     keys. Note that the default user is the same as the one who's
+     logged in on the controller.
 
    - =--ask-become-pass= is for sudo.
 
    - =--ask-vault-pass= is for decrypting the vault. I use it to store
-     a Github token allowing to add a public key (see the
-     [[file:roles/github-deploy-key/][github-deploy-key]] role).
-
-[TODO] My personal GPG key must be present on the target hosts.
+     a Github token allowing to add a public key to my Github
+     repository (see the [[file:roles/github-deploy-key/][github-deploy-key]] role).
 
 *** Run locally
 :PROPERTIES:
@@ -114,7 +116,6 @@ desired state defined by Ansible.
   ansible-playbook \
       -i localhost, \
       -e "ansible_connection=local" \
-      --ask-pass \
       --ask-become-pass \
       --ask-vault-pass \
       playbook.yml
@@ -125,8 +126,42 @@ desired state defined by Ansible.
 :CREATED:  [2021-08-27 Fri 13:53]
 :END:
 
-[TODO] Finally, the playbook might also be run locally on a fresh
-Debian install by running a bootstrapping script.
+Finally, the playbook might also be run locally on a fresh Debian
+install by running a bootstrapping script:
+
+#+begin_src sh
+  wget -qO - https://raw.githubusercontent.com/alecigne/ansible-desktop/develop/bootstrap.bash | bash
+#+end_src
+
+#+RESULTS:
+
+The bootstrapping script will install Git and Ansible and will clone
+this repository. It will then execute Ansible twice:
+
+- A first time for switching from Debian stable to Debian testing and
+  updating the system (=debian-upgrade= tag).
+
+  #+begin_src sh
+    ansible-playbook \
+        -i localhost, \
+        -e "ansible_connection=local" \
+        --ask-become-pass \
+        playbook.yml \
+        --tags debian-upgrade
+  #+end_src
+
+- A second time to execute the rest of the playbook using an updated
+  version of Ansible.
+
+  #+begin_src sh
+    ansible-playbook \
+        -i localhost, \
+        -e "ansible_connection=local" \
+        --ask-become-pass \
+        --ask-vault-pass \
+        playbook.yml \
+        --skip-tags debian-upgrade
+  #+end_src
 
 * Tasks
 
