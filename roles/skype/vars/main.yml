@@ -1,0 +1,8 @@
+---
+skype_repo:
+  file: "skype-stable"
+  repo: "deb [arch=amd64] https://repo.skype.com/deb stable main"
+
+skype_repo_key:
+  url: https://repo.skype.com/data/SKYPE-GPG-KEY
+  id: 1F3045A5DF7587C3

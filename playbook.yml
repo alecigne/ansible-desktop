@@ -77,3 +77,8 @@
   hosts: all
   roles: [my-utils]
   tags: [my-utils]
+
+- name: Install Skype
+  hosts: all
+  roles: [skype]
+  tags: skype

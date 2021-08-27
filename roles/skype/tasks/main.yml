@@ -1,0 +1,15 @@
+---
+- name: Add Skype repository
+  include_role:
+    name: add-apt-repo
+  vars:
+    apt_repo_keys:
+      - "{{ skype_repo_key }}"
+    apt_repositories:
+      - "{{ skype_repo }}"
+
+- name: Install Skype
+  include_role:
+    name: apt-install
+  vars:
+    apt_packages: [skypeforlinux]
