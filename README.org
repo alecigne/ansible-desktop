@@ -195,3 +195,7 @@ this repository. It will then execute Ansible twice:
 - [ ] Deploy Firefox with extensions
   + https://support.mozilla.org/en-US/kb/deploying-firefox-with-extensions
   + https://github.com/alzadude/ansible-firefox-addon
+
+* Links
+
+- https://github.com/cytopia/ansible-debian
