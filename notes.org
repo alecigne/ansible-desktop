@@ -1,0 +1,36 @@
+#+TITLE: Notes
+
+* Windows checklist
+:PROPERTIES:
+:CREATED:  [2021-10-09 Sat 09:27]
+:END:
+
+** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
+
+  I use it to swap Ctrl and Caps Lock.
+
+** WSL2
+
+  To check available distributions:
+
+  #+begin_src sh
+    wsl -l -o
+  #+end_src
+
+  To install Debian:
+
+  #+begin_src sh
+    wsl --install -d Debian
+  #+end_src
+
+  ...and then reboot.
+
+- [[https://docs.microsoft.com/fr-fr/windows/wsl/setup/environment#set-up-windows-terminal][Configure Windows Terminal]]
+
+- Debian can be launched in Windows Terminal with =wsl -d debian=.
+
+** Java
+
+- JDK 17
+
+- IntelliJ IDEA CE
