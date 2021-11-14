@@ -22,7 +22,13 @@
     headers:
       Authorization: "token {{ github_access_token }}"
 
+- name: Check if Raspberry Pi is online
+  shell: "ping -c 1 {{ rpi_ip }}"
+  register: ping_result
+  ignore_errors: yes
+
 - name: Deploy key to Raspberry Pi
+  when: "'100% packet loss' not in ping_result.stdout"
   expect:
     command: "ssh-copy-id -i {{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }} alc@{{ rpi_ip }}"
     responses:
