@@ -36,6 +36,7 @@ apt_packages:
   - firefox-esr
   - ghostscript
   - gimp
+  - gita
   - gnupg
   - i3
   - imagemagick
