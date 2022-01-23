@@ -52,10 +52,6 @@
 
 - name: Create and deploy a new SSH key
   hosts: all
-  vars_prompt:
-    - name: "raspberry_pi_password"
-      prompt: "Enter Raspberry Pi password"
-      private: yes
   roles: [ssh-key]
   tags: [ssh-key]
 
