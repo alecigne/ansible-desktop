@@ -1,5 +1,9 @@
 ---
-# TODO Protect with password
+- name: Creation of the .ssh directory
+  file:
+    path: ~/.ssh
+    state: directory
+
 - name: Generate a new SSH key
   openssh_keypair:
     path: "~/.ssh/{{ ssh_key_name }}"
