@@ -1,4 +1,12 @@
 ---
+- name: Ensure github.com is a known host
+  lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t ed25519 github.com') }}"
+    regexp: "^github\\.com"
+
 - name: Clone dotfiles
   git:
     repo: "{{ dotfiles_repo }}"
