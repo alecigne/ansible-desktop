@@ -1,5 +1,38 @@
 #+TITLE: Notes
 
+* Tasks
+
+- [X] Pull dotfiles submodules. The new workstation must register
+  itself to Github (SSH key) or a SSH keypair must be created
+  beforehand as a manual step.
+
+- [X] Do not re-execute Stow every time
+
+- [X] Reduce manual steps to a minimum
+
+- [X] Switch from tasks to roles
+
+- [ ] Customize the Debian installation. Interesting links:
+
+  + [[https://www.debian.org/releases/buster/amd64/apb.en.html][Preseeding]]
+  + [[https://wiki.debian.org/DebianCustomCD][Building a Custom Debian CD Set]]
+  + [[https://wiki.debian.org/Simple-CDD][=simple-cdd=]]
+
+- Packages to add:
+
+  + [ ] =veracrypt= \\
+    Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
+  + [ ] =signal-desktop=
+
+- [ ] Study the difference between =import= and =include= and act
+  accordingly
+
+- [ ] Read about Molecule
+
+- [ ] Deploy Firefox with extensions
+  + https://support.mozilla.org/en-US/kb/deploying-firefox-with-extensions
+  + https://github.com/alzadude/ansible-firefox-addon
+
 * Windows checklist
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]

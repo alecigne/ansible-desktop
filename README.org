@@ -77,6 +77,10 @@ machine on my local network.
      ansible -m ping -i 192.168.1.30, --ask-pass all
    #+end_src
 
+   Note that the default user is the same as the one who's logged in
+   on the controller. If the username is not the same, just add =-u
+   [username]=.
+
 2. Run the playbook:
 
    #+begin_src sh
@@ -86,15 +90,13 @@ machine on my local network.
          --ask-pass \
          --ask-become-pass \
          --ask-vault-pass \
+         --tags "tag1,tag2"
          playbook.yml
    #+end_src
 
-   #+RESULTS:
-
    - =--ask-pass= is necessary for the SSH connection (=sshpass= is
      installed on the controller). This could also be done using SSH
-     keys. Note that the default user is the same as the one who's
-     logged in on the controller.
+     keys.
 
    - =--ask-become-pass= is for sudo.
 
@@ -162,39 +164,6 @@ this repository. It will then execute Ansible twice:
         playbook.yml \
         --skip-tags debian-upgrade
   #+end_src
-
-* Tasks
-
-- [X] Pull dotfiles submodules. The new workstation must register
-  itself to Github (SSH key) or a SSH keypair must be created
-  beforehand as a manual step.
-
-- [X] Do not re-execute Stow every time
-
-- [X] Reduce manual steps to a minimum
-
-- [X] Switch from tasks to roles
-
-- [ ] Customize the Debian installation. Interesting links:
-
-  + [[https://www.debian.org/releases/buster/amd64/apb.en.html][Preseeding]]
-  + [[https://wiki.debian.org/DebianCustomCD][Building a Custom Debian CD Set]]
-  + [[https://wiki.debian.org/Simple-CDD][=simple-cdd=]]
-
-- Packages to add:
-
-  + [ ] =veracrypt= \\
-    Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
-  + [ ] =signal-desktop=
-
-- [ ] Study the difference between =import= and =include= and act
-  accordingly
-
-- [ ] Read about Molecule
-
-- [ ] Deploy Firefox with extensions
-  + https://support.mozilla.org/en-US/kb/deploying-firefox-with-extensions
-  + https://github.com/alzadude/ansible-firefox-addon
 
 * Links
 
