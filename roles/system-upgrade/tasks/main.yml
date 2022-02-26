@@ -21,4 +21,4 @@
 - name: Reboot the server
   reboot:
     reboot_timeout: 300
-  when: reboot_flag.stat.exists
+  when: reboot_flag.stat.exists and ansible_connection != 'local'
