@@ -74,3 +74,8 @@ tinytex_required_packages:
   - psnfss
   - ulem
   - wrapfig
+
+# IntelliJ
+intellij_edition: "ideaIC"
+intellij_version: "2021.3.2"
+intellij_install_dir: "{{ bin_dir }}/intellij-{{ intellij_edition }}-{{ intellij_version }}"

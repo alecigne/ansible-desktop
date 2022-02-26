@@ -1,0 +1,4 @@
+---
+intellij_edition: "ideaIC"
+intellij_version: "2021.3.2"
+intellij_install_dir: "/opt/idea/idea-{{ intellij_edition }}-{{ intellij_version }}"

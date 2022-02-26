@@ -74,6 +74,21 @@
   roles: [my-utils]
   tags: [my-utils]
 
+- name: Install Java
+  hosts: all
+  roles: [apt-install]
+  vars:
+    apt_packages:
+      - openjdk-11-jdk
+      - maven
+      - gradle
+  tags: java
+
+- name: Install IntelliJ
+  hosts: all
+  roles: [intellij]
+  tags: intellij
+
 - name: Install Skype
   hosts: all
   roles: [skype]

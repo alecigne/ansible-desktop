@@ -1,20 +1,13 @@
 ---
-- name: Check if IntelliJ archive is already present
-  stat:
-    path: "{{ intellij_download_path }}"
-  register: intellij_archive
-
 - name: Create download directory
   file:
     state: directory
     dest: "{{ intellij_download_dir }}"
-  when: not intellij_archive.stat.exists
 
 - name: Download IntelliJ
   get_url:
     url: "{{ intellij_download_url }}"
     dest: "{{ intellij_download_dir }}/{{ intellij_filename }}"
-  when: not intellij_archive.stat.exists
 
 - name: Create installation directory
   file:

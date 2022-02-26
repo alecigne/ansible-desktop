@@ -1,4 +1,4 @@
-#+TITLE: Ansible Desktop
+#+title: Ansible Desktop
 
 This repository aims at automating the setup of my Debian workstations
 using [[https://www.ansible.com/][Ansible]].
