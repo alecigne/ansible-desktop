@@ -19,6 +19,9 @@
   command: chdir="{{ dotfiles_dir }}" git submodule update --init -- emacs/.emacs.d stumpwm/.stumpwm.d
   register: update_github_submodules
   changed_when: update_github_submodules.stdout != ""
+  # Ignore errors: useful when run on an existing install since Git
+  # can refuse to overwrite local changes
+  ignore_errors: yes
 
 - name: Stow configurations
   expect:
