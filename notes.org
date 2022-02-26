@@ -1,4 +1,4 @@
-#+TITLE: Notes
+#+title: Notes
 
 * Tasks
 
@@ -32,6 +32,8 @@
 - [ ] Deploy Firefox with extensions
   + https://support.mozilla.org/en-US/kb/deploying-firefox-with-extensions
   + https://github.com/alzadude/ansible-firefox-addon
+
+- [ ] Create a Docker role
 
 * Windows checklist
 :PROPERTIES:
