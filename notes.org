@@ -35,14 +35,16 @@
 
 - [ ] Create a Docker role
 
+- [ ] Facilitate the configuration of WSL using this Ansible
+  repository
+
 * Windows checklist
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]
 :END:
 
-** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
-
-  I use it to swap Ctrl and Caps Lock.
+I did not explore the possibilities of Ansible on Windows. This
+checklist helps me remember how to set up my system.
 
 ** WSL2
 
@@ -64,8 +66,115 @@
 
 - Debian can be launched in Windows Terminal with =wsl -d debian=.
 
-** Java
+- To browse WSL from the Windows Explorer, just type =\\wsl$=.
 
-- JDK 17
+** Emacs
+:PROPERTIES:
+:CREATED:  [2022-07-02 Sat 13:27]
+:END:
 
-- IntelliJ IDEA CE
+*** Install Emacs
+:PROPERTIES:
+:CREATED:  [2022-07-02 sam. 15:23]
+:END:
+
+From [[http://mirrors.kernel.org/gnu/emacs/windows/][here]].
+
+*** Launch the Emacs daemon on startup
+:PROPERTIES:
+:CREATED:  [2022-07-02 Sat 13:27]
+:END:
+
+- Create an =emacs-daemon.bat= somewhere:
+
+  #+begin_src sh
+    @echo off
+    emacs.exe "--daemon"
+  #+end_src
+
+- Create a =.vbs= file in the Windows startup directory:
+
+#+begin_example
+  Set WshShell = CreateObject("WScript.Shell")
+  WshShell.Run chr(34) & "[path]\emacs-daemon.bat" & Chr(34), 0
+  Set WshShell = Nothing
+#+end_example
+
+*** Launch a client
+:PROPERTIES:
+:CREATED:  [2022-07-02 sam. 13:39]
+:END:
+
+#+begin_src sh
+  emacsclientw.exe -c -n -a ""
+#+end_src
+
+- =-n= :: Do not wait for the client to finish when you're launching
+from command line.
+
+- =-a= :: Specify an alternative editor if the emacs server isn't
+  running, but if you give it an empty string, it will try to start
+  the emacs server and connect to it.
+
+- =-c= :: In a windows shortcut, open a new frame.
+
+*** Create a context menu
+:PROPERTIES:
+:CREATED:  [2022-07-02 sam. 15:25]
+:END:
+
+- Create =emacs_explorer.reg=:
+
+  #+begin_example
+    Windows Registry Editor Version 5.00
+    ;; Be sure to set the correct path to Emacs on your system!
+    [HKEY_CURRENT_USER\Software\Classes\*\shell]
+
+    ;; Open file in existing frame
+    [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopencurrentframe]
+    @="&Emacs: Edit in existing window"
+    "icon"="C:\\path\\to\\emacs\\bin\\emacsclientw.exe"
+    [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopencurrentframe\command]
+    @="C:\\path\\to\\emacs\\bin\\emacsclientw.exe -n --alternate-editor=\"C:\\path\\to\\emacs\\bin\\runemacs.exe\" \"%1\""
+
+    ;; Open file in new frame
+    [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe]
+    @="&Emacs: Edit in new window"
+    "icon"="C:\\path\\to\\emacs\\bin\\emacsclientw.exe"
+    [HKEY_CURRENT_USER\Software\Classes\*\shell\emacsopennewframe\command]
+    @="C:\\path\\to\\emacs\\bin\\emacsclientw.exe -n --alternate-editor=\"C:\\path\\to\\emacs\\bin\\runemacs.exe\" -c \"%1\""
+  #+end_example
+
+- Replace the paths to Emacs binaries to match the location on your
+  system.
+
+- Double click the file and confirm the security warning to add this
+  to the registry.
+
+** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
+
+  I use it to swap Ctrl and Caps Lock.
+
+** SDKMAN!
+:PROPERTIES:
+:CREATED:  [2022-07-02 sam. 15:38]
+:END:
+
+- Install dependencies under WSL:
+
+  #+begin_src sh
+    sudo apt install zip unzip curl tar gzip
+  #+end_src
+
+- Install SDKMAN!:
+
+  #+begin_src sh
+    curl -s "https://get.sdkman.io" | bash
+  #+end_src
+
+** IntelliJ
+:PROPERTIES:
+:CREATED:  [2022-07-02 sam. 16:11]
+:END:
+
+- Add WSL to the trusted locations before using WSL in IntelliJ.
