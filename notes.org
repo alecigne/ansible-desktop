@@ -48,13 +48,15 @@ checklist helps me remember how to set up my system.
 
 ** WSL2
 
-  To check available distributions:
+- [[https://github.com/alecigne/ansible-desktop][Ansible]] could at least be used for WSL2 with a dedicated tag
+
+- To check available distributions:
 
   #+begin_src sh
     wsl -l -o
   #+end_src
 
-  To install Debian:
+- To install Debian:
 
   #+begin_src sh
     wsl --install -d Debian
@@ -67,6 +69,8 @@ checklist helps me remember how to set up my system.
 - Debian can be launched in Windows Terminal with =wsl -d debian=.
 
 - To browse WSL from the Windows Explorer, just type =\\wsl$=.
+
+- Use my usual [[https://github.com/alecigne/dotfiles][dotfiles]] with [[https://github.com/powerline/fonts][fonts patched for Powerline]]
 
 ** Emacs
 :PROPERTIES:
@@ -153,7 +157,7 @@ from command line.
 
 ** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
 
-  I use it to swap Ctrl and Caps Lock.
+I use it to swap Ctrl and Caps Lock.
 
 ** SDKMAN!
 :PROPERTIES:
