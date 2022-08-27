@@ -1,0 +1,10 @@
+---
+- name: Write keyboard configration
+  become: yes
+  lineinfile:
+    path: "{{ keyboard_file }}"
+    regexp: '^XKBOPTIONS.*'
+    line: 'XKBOPTIONS="ctrl:swapcaps"'
+    backrefs: yes
+  notify:
+    - Reconfigure keyboard

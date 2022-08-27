@@ -35,8 +35,11 @@
 
 - [ ] Create a Docker role
 
+
 - [ ] Facilitate the configuration of WSL using this Ansible
   repository
+
+- [ ] Use [[https://sdkman.io/][SDKMAN!]] instead of apt for SDKs
 
 * Windows checklist
 :PROPERTIES:

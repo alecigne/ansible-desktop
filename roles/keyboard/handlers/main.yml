@@ -1,0 +1,4 @@
+---
+- name: Reconfigure keyboard
+  become: yes
+  command: sudo setupcon

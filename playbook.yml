@@ -14,12 +14,14 @@
     - system-upgrade
   tags: [debian-upgrade]
 
-- name: Blacklist some modules
+- name: Configure some low-level settings
   hosts: all
   vars:
     blacklisted_modules: [pcspkr]
-  roles: [blacklist-modules]
-  tags: [blacklist-modules]
+  roles:
+    - blacklist-modules
+    - keyboard
+  tags: [settings]
 
 - name: Install requirements for Ansible
   hosts: all
