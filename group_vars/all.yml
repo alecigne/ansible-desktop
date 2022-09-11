@@ -45,6 +45,8 @@ apt_packages:
   - gita
   - gnupg
   - i3
+  - i3lock
+  - i3lock-fancy
   - imagemagick
   - ledger
   - mupdf
