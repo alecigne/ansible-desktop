@@ -185,3 +185,10 @@ I use it to swap Ctrl and Caps Lock.
 :END:
 
 - Add WSL to the trusted locations before using WSL in IntelliJ.
+
+* Linux checklist
+:PROPERTIES:
+:CREATED:  [2022-11-11 Fri 13:31]
+:END:
+
+- Install the [[https://github.com/powerline/fonts][fonts patched for Powerline]]
