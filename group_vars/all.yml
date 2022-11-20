@@ -64,12 +64,14 @@ apt_packages:
   - rxvt-unicode
   - stow
   - stow
+  - tlp
   - tmux
   - tree
   - unzip
   - vlc
   - xclip
   - xorg
+  - zip
 
 tinytex_required_packages:
   - capt-of

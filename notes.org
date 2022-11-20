@@ -18,12 +18,6 @@
   + [[https://wiki.debian.org/DebianCustomCD][Building a Custom Debian CD Set]]
   + [[https://wiki.debian.org/Simple-CDD][=simple-cdd=]]
 
-- Packages to add:
-
-  + [ ] =veracrypt= \\
-    Check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
-  + [ ] =signal-desktop=
-
 - [ ] Study the difference between =import= and =include= and act
   accordingly
 
@@ -35,13 +29,12 @@
 
 - [ ] Create a Docker role
 
-
 - [ ] Facilitate the configuration of WSL using this Ansible
   repository
 
 - [ ] Use [[https://sdkman.io/][SDKMAN!]] instead of apt for SDKs
 
-* Windows checklist
+* Windows notes
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]
 :END:
@@ -186,9 +179,32 @@ I use it to swap Ctrl and Caps Lock.
 
 - Add WSL to the trusted locations before using WSL in IntelliJ.
 
-* Linux checklist
+* Linux notes
 :PROPERTIES:
 :CREATED:  [2022-11-11 Fri 13:31]
 :END:
 
 - Install the [[https://github.com/powerline/fonts][fonts patched for Powerline]]
+
+- Optimize battery usage. Using =powerstat=, on idle:
+
+  #+begin_quote
+  System:  26.35 Watts on average with standard deviation 0.06
+  #+end_quote
+
+  After installing =tlp= and rebooting:
+
+  #+begin_quote
+  System:   5.91 Watts on average with standard deviation 0.03
+  #+end_quote
+
+- Packages to install :
+
+  + [ ] =synclient=
+  + [ ] =xserver-xorg-input-synaptics=
+  + [ ] =veracrypt= -- check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
+  + [ ] =signal-desktop=
+  + [X] =tlp=
+  + [X] =zip=
+
+- GnuPG : use the console PIN entry
