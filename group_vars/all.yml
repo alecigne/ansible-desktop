@@ -83,3 +83,7 @@ tinytex_required_packages:
 intellij_edition: "ideaIU"
 intellij_version: "2022.1.3"
 intellij_install_dir: "{{ bin_dir }}/intellij-{{ intellij_edition }}-{{ intellij_version }}"
+
+# Greenclip
+greenclip_version: "4.2"
+greenclip_install_dir: "{{ bin_dir }}"

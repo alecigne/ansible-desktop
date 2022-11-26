@@ -7,3 +7,11 @@
     autoclean: yes
     name: "{{ apt_packages }}"
     state: "{{ apt_state }}"
+
+- name: Download greenclip
+  get_url:
+    url: "{{ greenclip_download_url }}"
+    dest: "{{ greenclip_install_dir }}"
+
+- name: Make greenclip executable
+  file: "dest={{ greenclip_install_dir }}/greenclip mode=u+x"

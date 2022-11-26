@@ -1,0 +1,2 @@
+---
+greenclip_download_url: "https://github.com/erebe/greenclip/releases/download/v{{ greenclip_version }}/greenclip"
