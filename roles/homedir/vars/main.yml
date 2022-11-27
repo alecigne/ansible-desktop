@@ -2,7 +2,7 @@
 # Homedir structure
 directories:
   - "{{ bin_dir }}"
-  - "{{ dat_dir }}"
+  - "{{ doc_dir }}"
   - "{{ etc_dir }}"
   - "{{ ibx_dir }}"
   - "{{ med_dir }}"

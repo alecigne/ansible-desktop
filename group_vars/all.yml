@@ -1,6 +1,6 @@
 ---
 bin_dir: "{{ ansible_env.HOME }}/bin"
-dat_dir: "{{ ansible_env.HOME }}/dat"
+doc_dir: "{{ ansible_env.HOME }}/doc"
 etc_dir: "{{ ansible_env.HOME }}/etc"
 ibx_dir: "{{ ansible_env.HOME }}/ibx"
 med_dir: "{{ ansible_env.HOME }}/med"
