@@ -8,6 +8,7 @@
     name: "{{ apt_packages }}"
     state: "{{ apt_state }}"
 
+# TODO Remove this from the role
 - name: Download greenclip
   get_url:
     url: "{{ greenclip_download_url }}"

@@ -203,7 +203,7 @@ I use it to swap Ctrl and Caps Lock.
   + [ ] =synclient=
   + [ ] =xserver-xorg-input-synaptics=
   + [ ] =veracrypt= -- check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
-  + [ ] =signal-desktop=
+  + [X] =signal-desktop=
   + [X] =tlp=
   + [X] =zip=
 

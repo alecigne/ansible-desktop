@@ -1,0 +1,21 @@
+---
+# TODO Use the add-apt-repo role
+- name: Install Signal apt repo GPG key
+  become: yes
+  apt_key:
+    url: "{{ signal_key_url }}"
+    state: present
+    keyring: "{{ signal_key_location }}"
+
+- name: Add Signal apt repo
+  become: yes
+  apt_repository:
+    filename: "{{ signal_repo_file }}"
+    repo: "{{ signal_repo }}"
+    state: present
+
+- name: Install Signal
+  become: yes
+  apt:
+    name: "{{ signal_package }}"
+    state: present

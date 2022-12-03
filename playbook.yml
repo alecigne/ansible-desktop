@@ -96,6 +96,11 @@
   roles: [ skype ]
   tags: skype
 
+- name: Install Signal
+  hosts: all
+  roles: [ signal-desktop ]
+  tags: signal
+
 - name: Prepare Common Lisp environment
   hosts: all
   roles: [ apt-install ]
