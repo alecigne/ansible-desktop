@@ -1,0 +1,9 @@
+---
+- name: Check if Anki is installed
+  stat:
+    path: "{{ bin_dir }}/anki-{{ anki_version }}-linux-qt/anki"
+  register: anki_binary
+
+- name: Install Anki
+  include_tasks: anki.yml
+  when: not anki_binary.stat.exists

@@ -26,7 +26,8 @@ rpi_ip: 192.168.1.30
 apt_packages:
   - alsa-utils
   - alttab
-  - anki
+  # TODO Anki is not in Debian testing at the time of installation -- I use the Anki role temporarily
+  #  - anki
   - ansible
   # - apt-listbugs
   - aptitude
@@ -74,6 +75,7 @@ apt_packages:
   - xclip
   - xorg
   - zip
+  - zstd
 
 tinytex_required_packages:
   - capt-of
@@ -89,3 +91,6 @@ intellij_install_dir: "{{ bin_dir }}/intellij-{{ intellij_edition }}-{{ intellij
 # Greenclip
 greenclip_version: "4.2"
 greenclip_install_dir: "{{ bin_dir }}"
+
+# Anki
+anki_version: "2.1.60"

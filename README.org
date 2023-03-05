@@ -18,14 +18,18 @@ This short documentation acts as a personal reminder :)
 
 1. Download a =netinst= ISO image from the [[https://www.debian.org/distrib/netinst][official website]].
 
-2. Create a bootable USB drive:
+2. Create a bootable USB drive.
 
-   #+begin_src sh
-     sudo dd if=[path_to_iso] of=[path_to_usb]
-   #+end_src
+   - With =dd=:
 
-   I usually use =lsblk= to know the path to the USB drive. *Be
-   careful*, as choosing the wrong path might cause serious damage.
+     #+begin_src sh
+       sudo dd if=[path_to_iso] of=[path_to_usb]
+     #+end_src
+
+     I usually use =lsblk= to know the path to the USB drive. *Be
+     careful*, as choosing the wrong path might cause serious damage.
+
+   - Sometimes [[https://rufus.ie/en/][Rufus]] can work where =dd= doesn't.
 
 3. Install Debian.
 
@@ -55,7 +59,7 @@ This short documentation acts as a personal reminder :)
 
 There are 3 ways to execute the Ansible playbook.
 
-*** Run from a controller
+*** Run from a controller (recommended)
 :PROPERTIES:
 :CREATED:  [2021-08-27 Fri 13:50]
 :END:
@@ -63,34 +67,36 @@ There are 3 ways to execute the Ansible playbook.
 The provisioning may be done from a so-called controller, i.e. another
 machine on my local network.
 
-1. Test the connection. For example:
+1. Install =sshpass= and log into the node once using SSH. This will
+   add the fingerprint to the =known_hosts= file.
+
+2. Test the connection. For example:
+
+   #+begin_src sh
+     ansible -m ping -i 192.168.1.7, -u alc --ask-pass all
+   #+end_src
+
+   Without =-u=, the default user would be the same as the one who's
+   logged in on the controller.
+
+   Sometimes I use a [[https://lecigne.net/notes/qemu.html][QEMU virtual machine]] for testing purpose, with a
+   SSH port forwarding on port =2222=. In this case:
 
    #+begin_src sh
      ansible -m ping -i localhost, -e "ansible_port=2222" --ask-pass all
    #+end_src
 
-   This is for a [[https://lecigne.net/notes/qemu.html][QEMU virtual machine]] with a SSH port forwarding on
-   port =2222=. For a "normal" machine on the network, this would look
-   like this:
-
-   #+begin_src sh
-     ansible -m ping -i 192.168.1.30, --ask-pass all
-   #+end_src
-
-   Note that the default user is the same as the one who's logged in
-   on the controller. If the username is not the same, just add =-u
-   [username]=.
-
-2. Run the playbook:
+3. Run the playbook. I use the =basic-system= tag to setup, well, a
+   basic system, according to my preferences:
 
    #+begin_src sh
      ansible-playbook \
-         -i localhost, \
-         -e "ansible_port=2222" \
+         -u alc \
+         -i 192.168.1.7, \
          --ask-pass \
          --ask-become-pass \
          --ask-vault-pass \
-         --tags "tag1,tag2"
+         --tags "basic-system"
          playbook.yml
    #+end_src
 
@@ -102,7 +108,19 @@ machine on my local network.
 
    - =--ask-vault-pass= is for decrypting the vault. I use it to store
      a Github token allowing to add a public key to my Github
-     repository (see the [[file:roles/github-deploy-key/][github-deploy-key]] role).
+     repository (see the [[file:roles/ssh-key][ssh-key]] role).
+
+     The password can be tested beforehand on the encrypted token
+     using:
+
+     #+begin_src sh
+       ansible-vault decrypt
+     #+end_src
+
+     Just press Enter then C-d after pasting the string.
+
+   For QEMU, this is the same, but with =-i localhost= and =-e
+   "ansible_port=2222=.
 
 *** Run locally
 :PROPERTIES:

@@ -1,0 +1,5 @@
+---
+anki_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+anki_archive_filename: "anki-{{ anki_version }}-linux-qt6.tar.zst"
+anki_download_url: "https://github.com/ankitects/anki/releases/download/{{ anki_version }}/{{ anki_archive_filename }}"
+anki_download_path: "{{ anki_download_dir }}/{{ anki_archive_filename }}"

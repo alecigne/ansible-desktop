@@ -1,0 +1,29 @@
+# TODO Use a user-defined destination directory
+---
+- name: Create download directory
+  file:
+    state: directory
+    dest: "{{ anki_download_dir }}"
+
+- name: Download Anki
+  get_url:
+    url: "{{ anki_download_url }}"
+    dest: "{{ anki_download_path }}"
+
+- name: Create installation directory
+  file:
+    state: directory
+    dest: "{{ bin_dir }}"
+
+- name: Extract Anki to its installation directory
+  unarchive:
+    src: "{{ anki_download_path }}"
+    remote_src: true
+    dest: "{{ bin_dir }}"
+    creates: "{{ bin_dir }}/anki-{{ anki_version }}-linux-qt6"
+
+- name: Symlink Anki binary
+  file:
+    src: "{{ bin_dir }}/anki-{{ anki_version }}-linux-qt6/anki"
+    path: "{{ bin_dir }}/anki"
+    state: link

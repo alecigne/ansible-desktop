@@ -34,6 +34,8 @@
 
 - [ ] Use [[https://sdkman.io/][SDKMAN!]] instead of apt for SDKs
 
+- [ ] Roles should be independent of each other
+
 * Windows notes
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]
