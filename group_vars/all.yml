@@ -63,6 +63,7 @@ apt_packages:
   - restic
   - ripgrep
   - rofi
+  # Used as a backup terminal emulator -- I use Alacritty
   - rxvt-unicode
   - stow
   - stow

@@ -57,6 +57,27 @@
     - basic-system
     - zsh
 
+# TODO Make a dedicated role?
+- name: Install Alacritty
+  hosts: all
+  roles: [ apt-install ]
+  vars:
+    apt_packages:
+      - cargo
+      - cmake
+      - pkg-config
+      - libfreetype6-dev
+      - libfontconfig1-dev
+      - libxcb-xfixes0-dev
+      - libxkbcommon-dev
+      - python3
+  post_tasks:
+    - name: Install Cargo package
+      shell: "cargo install alacritty --locked"
+  tags:
+    - basic-system
+    - alacritty
+
 - name: Create and deploy a new SSH key
   hosts: all
   roles: [ ssh-key ]
