@@ -1,0 +1,16 @@
+---
+- name: Create destination directory
+  when: jetbrainsmono is failed
+  file:
+    state: directory
+    dest: "{{ fontawesome_dest_dir }}"
+
+- name: Download and unarchive JetBrains Mono
+  when: jetbrainsmono is failed
+  ansible.builtin.unarchive:
+    src: "{{ fontawesome_src_url }}"
+    dest: "{{ fontawesome_dest_dir }}"
+    remote_src: yes
+
+- name: Refresh font cache
+  shell: "fc-cache -v"

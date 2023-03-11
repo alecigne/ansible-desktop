@@ -1,0 +1,15 @@
+---
+- name: Create destination directory
+  file:
+    state: directory
+    dest: "{{ fontawesome_dest_dir }}"
+
+- name: Download and unarchive Font Awesome
+  ansible.builtin.unarchive:
+    src: "{{ fontawesome_src_url }}"
+    dest: "{{ fontawesome_dest_dir }}"
+    extra_opts: "-j"
+    remote_src: yes
+
+- name: Refresh font cache
+  shell: "fc-cache -v"

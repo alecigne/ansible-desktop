@@ -1,0 +1,18 @@
+---
+- name: Check if JetBrains Mono is already installed
+  shell: "fc-list | grep -i \"jetbrainsmono\""
+  ignore_errors: yes
+  register: jetbrainsmono
+
+- name: Check if Font Awesome is already installed
+  shell: "fc-list | grep -i \"font awesome\""
+  ignore_errors: yes
+  register: fontawesome
+
+- name: Install JetBrains Mono
+  when: jetbrainsmono is failed
+  include_tasks: jetbrains-mono.yml
+
+- name: Install Font Awesome
+  when: fontawesome is failed
+  include_tasks: fontawesome.yml

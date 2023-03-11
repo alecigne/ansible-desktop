@@ -1,0 +1,6 @@
+---
+# JetBrains Mono
+jetbrains-mono_src_url: "https://download.jetbrains.com/fonts/JetBrainsMono-{{ jetbrains_mono_version }}.zip"
+
+# FontAwesome
+fontawesome_src_url: "https://use.fontawesome.com/releases/v{{ fontawesome_version }}/fontawesome-free-{{ fontawesome_version }}-desktop.zip"

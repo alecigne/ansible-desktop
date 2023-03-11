@@ -1,3 +1,0 @@
----
-dest_dir: "{{ ansible_env.HOME }}/.local/share/fonts/jetbrains-mono"
-jetbrains_mono_version: "2.304"

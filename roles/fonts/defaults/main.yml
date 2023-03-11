@@ -1,0 +1,11 @@
+---
+# Common
+fonts_dir: "{{ ansible_env.HOME }}/.local/share/fonts"
+
+# JetBrains Mono
+jetbrains-mono_dest_dir: "{{ fonts_dir }}/jetbrains-mono"
+jetbrains_mono_version: "2.304"
+
+# Font Awesome
+fontawesome_dest_dir: "{{ fonts_dir }}/fontawesome"
+fontawesome_version: "6.3.0"
