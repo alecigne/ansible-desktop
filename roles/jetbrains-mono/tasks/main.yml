@@ -1,0 +1,21 @@
+---
+- name: Check if JetBrains Mono is already installed
+  shell: "fc-list | grep -i \"jetbrainsmono\""
+  ignore_errors: yes
+  register: result
+
+- name: Create destination directory
+  when: result is failed
+  file:
+    state: directory
+    dest: "{{ dest_dir }}"
+
+- name: Download and unarchive JetBrains Mono
+  when: result is failed
+  ansible.builtin.unarchive:
+    src: "{{ src_url }}"
+    dest: "{{ dest_dir }}"
+    remote_src: yes
+
+- name: Refresh font cache
+  shell: "fc-cache -v"

@@ -103,6 +103,13 @@
     - basic-system
     - anki
 
+- name: Install fonts
+  hosts: all
+  roles: [ jetbrains-mono ]
+  tags:
+    - basic-system
+    - jetbrains-mono
+
 - name: Install TinyTex
   hosts: all
   roles: [ tinytex ]
