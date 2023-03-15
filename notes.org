@@ -95,6 +95,19 @@ Remember to create a local config for:
 - Emacs (=alc-local.el=)
 - etc.
 
+It seems that a SSH port can't be specified in =.gitmodules=. So you
+need to create a =~/.ssh/config= file (=chmod 600=) that contains
+something like:
+
+#+begin_example
+  Host [ip]
+  Port 2222
+#+end_example
+
+Then the port will be automatically right when initialiazing the
+submodule. Be careful, apparently the =.git/config= file is updated
+after the first try so you need to delete any wrong entry.
+
 ** Windows
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]
