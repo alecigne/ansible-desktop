@@ -43,16 +43,12 @@ apt_packages:
   - filezilla
   - firefox-esr
   - ghostscript
-  - gimp
-  - gita
   - gnupg
   - i3
   - i3lock
   - i3lock-fancy
   - imagemagick
-  - ledger
   - mupdf
-  - mpv
   - ncdu
   - network-manager
   - numlockx
@@ -77,6 +73,13 @@ apt_packages:
   - xorg
   - zip
   - zstd
+
+# Extra packages not necessary for a basic system
+apt_extra_packages:
+  - gimp
+  - ledger
+  - mpv
+  - transmission-remote-gtk
 
 tinytex_required_packages:
   - capt-of

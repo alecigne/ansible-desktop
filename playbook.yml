@@ -131,6 +131,15 @@
     - basic-system
     - fonts
 
+- name: Install extra packages
+  hosts: all
+  roles: [ apt-install ]
+  vars:
+    apt_packages: "{{ apt_extra_packages }}"
+  tags:
+    - extra-system
+    - extra-packages
+
 - name: Install TinyTex
   hosts: all
   roles: [ tinytex ]
