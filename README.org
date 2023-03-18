@@ -134,10 +134,12 @@ desired state defined by Ansible.
 
 #+begin_src sh
   ansible-playbook \
+      -u alc \
       -i localhost, \
       -e "ansible_connection=local" \
       --ask-become-pass \
       --ask-vault-pass \
+      --tags "basic-system"
       playbook.yml
 #+end_src
 

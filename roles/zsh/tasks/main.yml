@@ -29,9 +29,15 @@
     # Any modified files in the working repository will be discarded
     force: yes
 
-- name: Install powerlevel10k
+- name: Install powerlevel10k theme
   git:
     repo: "{{ powerlevel10k_repo }}"
     depth: 1
     dest: "{{ powerlevel10k_dest }}"
+    force: yes
+
+- name: Install zsh-syntax-highlighting plugin
+  git:
+    repo: "{{ zsh_syntax_highlighting_repo }}"
+    dest: "{{ zsh_syntax_highlighting_dest }}"
     force: yes
