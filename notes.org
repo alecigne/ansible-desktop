@@ -1,5 +1,72 @@
 #+title: Notes
 
+* Manual steps
+:PROPERTIES:
+:CREATED:  [2023-03-12 Sun 19:19]
+:END:
+
+This section is a reminder about steps that are still manual. They
+could be automated in the future.
+
+** Cloning my Org repo
+:PROPERTIES:
+:CREATED:  [2023-03-12 Sun 19:19]
+:END:
+
+1. Add the SSH key to the =authorized_keys= file on the server:
+
+   #+begin_src sh
+     ssh-copy-id -i [key] -p 2222 [ip]
+   #+end_src
+
+2. Clone the repo:
+
+   #+begin_src sh
+     git clone ssh://[user]@[ip]:[port]/[path-to-repo]
+   #+end_src
+
+** Importing GPG keys
+:PROPERTIES:
+:CREATED:  [2023-03-12 Sun 19:23]
+:END:
+
+1. Export keys on a computer that has them:
+
+   #+begin_src sh
+     gpg --export [public-id] > public.key
+     gpg --export-secret-keys [secret-key] > private.key
+   #+end_src
+
+2. Copy the keys with =scp=:
+
+   #+begin_src sh
+     scp private.key public.key [user]@[ip]:[path]
+   #+end_src
+
+** Creating a local config
+:PROPERTIES:
+:CREATED:  [2023-03-12 Sun 19:37]
+:END:
+
+Remember to create a local config for:
+
+- i3
+- Emacs (=alc-local.el=)
+- etc.
+
+It seems that a SSH port can't be specified in =.gitmodules=. So you
+need to create a =~/.ssh/config= file (=chmod 600=) that contains
+something like:
+
+#+begin_example
+  Host [ip]
+  Port 2222
+#+end_example
+
+Then the port will be automatically right when initialiazing the
+submodule. Be careful, apparently the =.git/config= file is updated
+after the first try so you need to delete any wrong entry.
+
 * Tasks
 
 - [X] Pull dotfiles submodules. The new workstation must register
@@ -36,79 +103,39 @@
 
 - [ ] Roles should be independent of each other
 
-* Manual steps
-:PROPERTIES:
-:CREATED:  [2023-03-12 Sun 19:19]
-:END:
+- [X] Install the [[https://github.com/powerline/fonts][fonts patched for Powerline]]
 
-This section is a reminder about steps that are still manual. They
-could be automated in the future.
+  Ansible now installs JetBrains Mono, which supports Powerline \o/
 
-** Common
-:PROPERTIES:
-:CREATED:  [2023-03-12 Sun 19:26]
-:END:
+- Optimize battery usage. Using =powerstat=, on idle:
 
-*** Cloning my Org repo
-:PROPERTIES:
-:CREATED:  [2023-03-12 Sun 19:19]
-:END:
+  #+begin_quote
+  System:  26.35 Watts on average with standard deviation 0.06
+  #+end_quote
 
-1. Add the SSH key to the =authorized_keys= file on the server:
+  After installing =tlp= and rebooting:
 
-   #+begin_src sh
-     ssh-copy-id -i [key] -p 2222 [ip]
-   #+end_src
+  #+begin_quote
+  System:   5.91 Watts on average with standard deviation 0.03
+  #+end_quote
 
-2. Clone the repo:
+- Packages to install :
 
-   #+begin_src sh
-     git clone ssh://[user]@[ip]:[port]/[path-to-repo]
-   #+end_src
+  + [ ] =synclient=
+  + [ ] =xserver-xorg-input-synaptics=
+  + [ ] =veracrypt= -- check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
+  + [X] =signal-desktop=
+  + [X] =tlp=
+  + [X] =zip=
 
-*** Importing GPG keys
-:PROPERTIES:
-:CREATED:  [2023-03-12 Sun 19:23]
-:END:
+- [ ] GnuPG : use the console PIN entry
 
-1. Export keys on a computer that has them:
+- Install zsh plugins
+  + [ ] =zsh-syntax-highlighting=
+  + [ ] =zsh-autocomplete=
+  + [ ] =zsh-autosuggestions=
 
-   #+begin_src sh
-     gpg --export [public-id] > public.key
-     gpg --export-secret-keys [secret-key] > private.key
-   #+end_src
-
-2. Copy the keys with =scp=:
-
-   #+begin_src sh
-     scp private.key public.key [user]@[ip]:[path]
-   #+end_src
-
-*** Creating a local config
-:PROPERTIES:
-:CREATED:  [2023-03-12 Sun 19:37]
-:END:
-
-Remember to create a local config for:
-
-- i3
-- Emacs (=alc-local.el=)
-- etc.
-
-It seems that a SSH port can't be specified in =.gitmodules=. So you
-need to create a =~/.ssh/config= file (=chmod 600=) that contains
-something like:
-
-#+begin_example
-  Host [ip]
-  Port 2222
-#+end_example
-
-Then the port will be automatically right when initialiazing the
-submodule. Be careful, apparently the =.git/config= file is updated
-after the first try so you need to delete any wrong entry.
-
-** Windows
+* Windows
 :PROPERTIES:
 :CREATED:  [2021-10-09 Sat 09:27]
 :END:
@@ -116,7 +143,7 @@ after the first try so you need to delete any wrong entry.
 I did not explore the possibilities of Ansible on Windows. This
 checklist helps me remember how to set up my system.
 
-*** WSL2
+** WSL2
 
 - [[https://github.com/alecigne/ansible-desktop][Ansible]] could at least be used for WSL2 with a dedicated tag
 
@@ -142,19 +169,19 @@ checklist helps me remember how to set up my system.
 
 - Use my usual [[https://github.com/alecigne/dotfiles][dotfiles]] with [[https://github.com/powerline/fonts][fonts patched for Powerline]]
 
-*** Emacs
+** Emacs
 :PROPERTIES:
 :CREATED:  [2022-07-02 Sat 13:27]
 :END:
 
-**** Install Emacs
+*** Install Emacs
 :PROPERTIES:
 :CREATED:  [2022-07-02 sam. 15:23]
 :END:
 
 From [[http://mirrors.kernel.org/gnu/emacs/windows/][here]].
 
-**** Launch the Emacs daemon on startup
+*** Launch the Emacs daemon on startup
 :PROPERTIES:
 :CREATED:  [2022-07-02 Sat 13:27]
 :END:
@@ -174,7 +201,7 @@ From [[http://mirrors.kernel.org/gnu/emacs/windows/][here]].
   Set WshShell = Nothing
 #+end_example
 
-**** Launch a client
+*** Launch a client
 :PROPERTIES:
 :CREATED:  [2022-07-02 sam. 13:39]
 :END:
@@ -192,7 +219,7 @@ from command line.
 
 - =-c= :: In a windows shortcut, open a new frame.
 
-**** Create a context menu
+*** Create a context menu
 :PROPERTIES:
 :CREATED:  [2022-07-02 sam. 15:25]
 :END:
@@ -225,11 +252,11 @@ from command line.
 - Double click the file and confirm the security warning to add this
   to the registry.
 
-*** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
+** [[https://docs.microsoft.com/fr-fr/windows/powertoys/][PowerToys]]
 
 I use it to swap Ctrl and Caps Lock.
 
-*** SDKMAN!
+** SDKMAN!
 :PROPERTIES:
 :CREATED:  [2022-07-02 sam. 15:38]
 :END:
@@ -246,41 +273,9 @@ I use it to swap Ctrl and Caps Lock.
     curl -s "https://get.sdkman.io" | bash
   #+end_src
 
-*** IntelliJ
+** IntelliJ
 :PROPERTIES:
 :CREATED:  [2022-07-02 sam. 16:11]
 :END:
 
 - Add WSL to the trusted locations before using WSL in IntelliJ.
-
-** Linux
-:PROPERTIES:
-:CREATED:  [2022-11-11 Fri 13:31]
-:END:
-
-- [X] Install the [[https://github.com/powerline/fonts][fonts patched for Powerline]]
-
-  Ansible now installs JetBrains Mono, which supports Powerline \o/
-
-- Optimize battery usage. Using =powerstat=, on idle:
-
-  #+begin_quote
-  System:  26.35 Watts on average with standard deviation 0.06
-  #+end_quote
-
-  After installing =tlp= and rebooting:
-
-  #+begin_quote
-  System:   5.91 Watts on average with standard deviation 0.03
-  #+end_quote
-
-- Packages to install :
-
-  + [ ] =synclient=
-  + [ ] =xserver-xorg-input-synaptics=
-  + [ ] =veracrypt= -- check [[https://github.com/rodrigorega/ansible-role-VeraCrypt/blob/master/tasks/main.yml][this]].
-  + [X] =signal-desktop=
-  + [X] =tlp=
-  + [X] =zip=
-
-- GnuPG : use the console PIN entry
