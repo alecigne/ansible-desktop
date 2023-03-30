@@ -131,9 +131,15 @@ after the first try so you need to delete any wrong entry.
 - [ ] GnuPG : use the console PIN entry
 
 - Install zsh plugins
-  + [ ] =zsh-syntax-highlighting=
+  + [X] =zsh-syntax-highlighting=
   + [ ] =zsh-autocomplete=
   + [ ] =zsh-autosuggestions=
+
+- [ ] Improve the management of an overall "state": the list of
+  packages, for example, of the fact that a specific role should be
+  activated or not, should depend on a host. It is impossible to
+  always maintain a specific host in a desired state by just using
+  tags one by one.
 
 * Windows
 :PROPERTIES:
