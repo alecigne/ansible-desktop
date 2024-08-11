@@ -152,7 +152,7 @@ Finally, the playbook might also be run locally on a fresh Debian
 install by running a bootstrapping script:
 
 #+begin_src sh
-  wget -qO - https://raw.githubusercontent.com/alecigne/ansible-desktop/develop/bootstrap.bash | bash
+  wget -qO - https://raw.githubusercontent.com/alecigne/ansible-desktop/master/bootstrap.bash | bash
 #+end_src
 
 #+RESULTS:
