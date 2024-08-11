@@ -38,6 +38,7 @@ apt_packages:
   - cmus
   - cowsay
   - curl
+  - dunst
   - emacs
   - feh
   - filezilla
