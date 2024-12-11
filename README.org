@@ -1,5 +1,7 @@
 #+title: Ansible Desktop
 
+⚠️ This project needs to be reworked.
+
 This repository aims at automating the setup of my Debian workstations
 using [[https://www.ansible.com/][Ansible]].
 
